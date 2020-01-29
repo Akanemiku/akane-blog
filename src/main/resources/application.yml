@@ -1,0 +1,42 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: akane-blog
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    platform: mysql
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/akane_blog?serverTimezone=GMT%2B8&useSSL=false&characterEncoding=UTF-8
+    username: root
+    password: 6458
+    druid:
+      initial-size: 2
+      min-idle: 2
+      max-active: 8
+      max-wait: 60000
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      pool-prepared-statements: true
+      max-pool-prepared-statement-per-connection-size: 20
+      filters: stat,wall
+      connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+      stat-view-servlet:
+        url-pattern: "/druid/*"
+        login-username: akane
+        login-password: 6458
+  jpa:
+    show-sql: true
+    # 改变实体映射策略，驼峰允许
+    hibernate:
+        naming:
+          physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+          implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+logging:
+  level:
+    org:
+      springframework:
+        web: trace
