@@ -43,3 +43,6 @@ spring:
         naming:
           physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
           implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: github.akanemiku.akaneblog.model

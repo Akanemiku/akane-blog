@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="github.akanemiku.akaneblog.repository.dao.MetaDao">
+
+    <!--表名-->
+    <sql id="BASE_TABLE">
+        t_meta
+    </sql>
+    <!--列名-->
+    <sql id="BASE_COLUMN">
+        m.mid, m.name, m.slug, m.type, m.contentType, m.description, m.sort, m.parent
+    </sql>
+
+    <sql id="RELATION_SHIP_TABLE">
+        t_relation
+    </sql>
+
+    <resultMap id="BaseResultMap" type="github.akanemiku.akaneblog.model.Meta">
+        <id column="mid" jdbcType="INTEGER" property="mid"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="slug" jdbcType="VARCHAR" property="slug"/>
+        <result column="type" jdbcType="VARCHAR" property="type"/>
+        <result column="description" jdbcType="VARCHAR" property="description"/>
+        <result column="sort" jdbcType="INTEGER" property="sort"/>
+        <result column="parent" jdbcType="INTEGER" property="parent"/>
+    </resultMap>
+
+    <resultMap id="MetaDTO" type="github.akanemiku.akaneblog.dto.MetaDTO" extends="BaseResultMap">
+        <result column="count" property="count" jdbcType="INTEGER" />
+    </resultMap>
+
+    <select id="selectFromSql" resultMap="MetaDTO" parameterType="Map">
+        SELECT
+          a.*,
+          count(b.cid) AS count
+        FROM
+          <include refid="BASE_TABLE" /> AS a
+        LEFT JOIN
+          <include refid="RELATION_SHIP_TABLE"/> AS b ON a.mid = b.mid
+        WHERE
+          a.type = #{type}
+        GROUP BY
+          a.mid
+        ORDER BY
+          #{order}
+        LIMIT #{limit}
+    </select>
+
+</mapper>

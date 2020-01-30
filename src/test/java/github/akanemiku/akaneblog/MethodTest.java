@@ -1,0 +1,31 @@
+package github.akanemiku.akaneblog;
+
+import github.akanemiku.akaneblog.dto.MetaDTO;
+import github.akanemiku.akaneblog.repository.MetaRepository;
+import github.akanemiku.akaneblog.repository.dao.MetaDao;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+@SpringBootTest
+@RunWith(SpringRunner.class)
+public class MethodTest {
+    @Autowired
+    private MetaDao dao;
+    @Test
+    public void test1(){
+        Map<String, Object> paraMap = new HashMap<>();
+        paraMap.put("type", "category");
+        paraMap.put("order", "count desc, a.mid desc");
+        paraMap.put("limit", 5);
+        List<MetaDTO> metaDTOS = dao.selectFromSql(paraMap);
+        System.out.println(metaDTOS.toString());
+    }
+
+}

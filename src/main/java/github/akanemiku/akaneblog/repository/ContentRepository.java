@@ -8,6 +8,11 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface ContentRepository extends JpaRepository<Content,Integer> {
 
+    /**
+     * 根据pageable分页
+     * @param pageable
+     * @return
+     */
     @Query(nativeQuery = true,value = "select * from t_content order by created desc")
     Page<Content> findAll(Pageable pageable);
 
