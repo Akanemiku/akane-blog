@@ -2,34 +2,27 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <body>
 <nav class="pagination" th:fragment="pageNav(pageInfo)">
-
-    <th:block th:if="${pageInfo.hasPreviousPage}">
-        <a class="extend prev" rel="prev" th:href="@{'?page='+${pageInfo.prePage}}">
+    <!--前一页-->
+    <th:block th:if="${pageInfo.hasPrevious()}">
+        <a class="extend prev" rel="prev" th:href="@{'?pageNo='+${pageInfo.previousPageable()}}">
             <i class="fa fa-angle-left"></i>
         </a>
     </th:block>
 
-    <!--<span class="page-number" href="?page=1">首页</span>-->
-
-
-    <th:block th:each=" nav : ${pageInfo.navigatepageNums}">
-        <span th:class="${nav==pageInfo.pageNum} ? 'current' : ''">
-            <a class="page-number" th:href="@{'?page='+${nav} }" th:text="${nav}"></a>
+    <!--页码数字-->
+    <th:block th:each=" nav : ${#numbers.sequence(0,pageInfo.getTotalPages()-1)}">
+        <span th:class="${nav==pageInfo.getNumber()} ? 'current' : ''">
+            <a class="page-number" th:href="@{'?pageNo='+${nav} }" th:text="${nav+1}"></a>
 
         </span>
     </th:block>
 
-
-    <!--<a class="page-number" th:href="@{'?page='+${pageInfo.pages}" th:text="${pageInfo.pages}"></a>-->
-
-    <th:block th:if="${pageInfo.hasNextPage}">
-        <a class="extend next" rel="next"  th:href="@{'?page='+${pageInfo.nextPage}}">
+    <!--后一页-->
+    <th:block th:if="${pageInfo.hasNext()}">
+        <a class="extend next" rel="next" th:href="@{'?pageNo='+${pageInfo.nextPageable()}}">
             <i class="fa fa-angle-right"></i>
         </a>
     </th:block>
-
-
 </nav>
-
 </body>
 </html>

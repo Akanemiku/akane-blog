@@ -28,15 +28,18 @@ spring:
         url-pattern: "/druid/*"
         login-username: akane
         login-password: 6458
+
+  thymeleaf:
+    prefix: classpath:/templates/
+    check-template-location: true
+    suffix: .html
+    encoding: utf-8
+    cache: false
+
   jpa:
     show-sql: true
-    # ¸Ä±äÊµÌåÓ³Éä²ßÂÔ£¬ÍÕ·åÔÊĞí
+    # æ”¹å˜å®ä½“æ˜ å°„ç­–ç•¥ï¼Œé©¼å³°å…è®¸
     hibernate:
         naming:
           physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
           implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
-logging:
-  level:
-    org:
-      springframework:
-        web: trace
