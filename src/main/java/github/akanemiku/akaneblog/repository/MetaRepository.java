@@ -14,7 +14,7 @@ public interface MetaRepository extends JpaRepository<Meta, Integer> {
      * @return
      */
     @Query(nativeQuery = true, value = "select count(*) from t_meta where type like %?1%")
-    Long getMetasCountByType(@Param("type") String type);
+    Long findMetasCountByType(@Param("type") String type);
 
     /**
      * 通过名称和类型查找某一Meta
@@ -24,5 +24,5 @@ public interface MetaRepository extends JpaRepository<Meta, Integer> {
      * @return
      */
     @Query(nativeQuery = true, value = "select * from t_meta where type=?1 and name=?2")
-    Meta getMetaByNameAndType(@Param("type") String type, @Param("name") String name);
+    Meta findMetaByNameAndType(@Param("type") String type, @Param("name") String name);
 }

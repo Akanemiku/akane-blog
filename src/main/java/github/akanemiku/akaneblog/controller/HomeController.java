@@ -74,5 +74,31 @@ public class HomeController {
         return "blog/category_detail";
     }
 
+    @GetMapping(value = "/about")
+    public String about() {
+        return "blog/about";
+    }
+
+    @GetMapping(value = "/tags")
+    public String tags(HttpServletRequest request) {
+        // 获取标签
+        List<MetaDTO> tags = metaService.getMetaList(Types.TAG.getType(), null, WebConst.MAX_POSTS);
+        // 标签总数
+        Long tagCount = metaService.getMetasCountByType(Types.TAG.getType());
+        request.setAttribute("tags", tags);
+        request.setAttribute("tagCount", tagCount);
+        return "blog/tags";
+    }
+
+    @GetMapping(value = "/tags/{name}")
+    public String tagsDetail(@PathVariable("name") String name,
+                             HttpServletRequest request){
+        Meta tags = metaService.getMetaByNameAndType(Types.TAG.getType(),name);
+        List<Content> articles = contentService.getArticleByTag(tags);
+        request.setAttribute("articles",articles);
+        request.setAttribute("tags",tags.getName());
+        return "blog/tags_detail";
+    }
+
 
 }

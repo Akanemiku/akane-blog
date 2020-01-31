@@ -91,9 +91,9 @@ public class BaseInterceptor implements HandlerInterceptor {
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object o, ModelAndView view) throws Exception {
 //        OptionsDomain ov = optionService.getOptionByName("site_record");
 //        // 分类总数
-//        Long categoryCount = metaService.getMetasCountByType(Types.CATEGORY.getType());
+//        Long categoryCount = metaService.findMetasCountByType(Types.CATEGORY.getType());
 //        // 标签总数
-//        Long tagCount = metaService.getMetasCountByType(Types.TAG.getType());
+//        Long tagCount = metaService.findMetasCountByType(Types.TAG.getType());
 //        // 获取文章总数
 //        StatisticsDto statistics = siteService.getStatistics();
 //        // 获取友情链接

@@ -42,12 +42,12 @@ public class MetaServiceImpl implements MetaService {
 
     @Override
     public Long getMetasCountByType(String type) {
-        return metaRepository.getMetasCountByType(type);
+        return metaRepository.findMetasCountByType(type);
     }
 
     @Override
     public Meta getMetaByNameAndType(String type, String name) {
         // TODO name为空异常
-        return metaRepository.getMetaByNameAndType(type,name);
+        return metaRepository.findMetaByNameAndType(type,name);
     }
 }

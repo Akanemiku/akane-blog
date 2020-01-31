@@ -1,6 +1,8 @@
 package github.akanemiku.akaneblog.repository;
 
 import github.akanemiku.akaneblog.model.Content;
+import github.akanemiku.akaneblog.model.Relation;
+import io.swagger.models.auth.In;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -27,5 +29,8 @@ public interface ContentRepository extends JpaRepository<Content, Integer> {
      * @return
      */
     @Query(nativeQuery = true, value = "select * from t_content where categories=?1")
-    List<Content> getArticleByCategory(@Param("category") String category);
+    List<Content> findArticleByCategory(@Param("category") String category);
+
+    @Query(nativeQuery = true,value = "select * from t_content where cid in :cid")
+    List<Content> findArticleByTags(@Param("cid") List<Integer> cid);
 }

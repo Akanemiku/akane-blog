@@ -1,11 +1,12 @@
 package github.akanemiku.akaneblog.model;
 
-import github.akanemiku.akaneblog.model.id.RelationId;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.Table;
 import java.io.Serializable;
 
@@ -14,9 +15,15 @@ import java.io.Serializable;
  */
 @Data
 @Entity
+@Table(name = "t_relation")
 @NoArgsConstructor
-@Table(name = "t_relationship")
+@AllArgsConstructor
+@IdClass(Relation.class)//所有字段均为主键
 public class Relation implements Serializable {
-    @EmbeddedId
-    RelationId relationId;
+    /** 文章主键 */
+    private Integer cid;
+
+    /** 项目编号 */
+    @Id
+    private Integer mid;
 }
