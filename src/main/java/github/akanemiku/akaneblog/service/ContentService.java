@@ -26,5 +26,12 @@ public interface ContentService {
      */
     List<Content> getArticleByTag(Meta tag);
 
+    /**
+     * 根据文章id获取文章
+     * @param cid
+     * @return
+     */
     Content getArticleById(Integer cid);
+
+    void updateContent(Content content);
 }

@@ -111,14 +111,15 @@
             }
         }
 
+        // 邮箱正则，用test不能加引号
+        var email_reg = /^[A-Za-z0-9]+([_\.][A-Za-z0-9]+)*@([A-Za-z0-9\-]+\.)+[A-Za-z]{2,6}$/;
+
         function commentClick() {
             var content = $("#comment-content").val();
             var author = $("#nickname").val();
             var email = $("#email").val();
             var url = $("#url").val();
-            var coid = $("#coid").val();
             var cid = $("#cid").val();
-            var csrf_token = $("#csrf_token").val();
 
             if (null == content || "" == content || undefined == content) {
                 alert("内容不能为空");
@@ -132,14 +133,18 @@
                 alert("邮箱不能为空");
                 return false;
             }
+            if (email_reg.test(email)){
+                alert("邮箱格式正确");
+            }else{
+                alert("邮箱格式不正确");
+                return false;
+            }
 
             var data = {
                 "content": content,
                 "author":author,
                 "email": email,
                 "url": url,
-                "csrf_token": csrf_token,
-                "coid": coid,
                 "cid": cid
             };
 

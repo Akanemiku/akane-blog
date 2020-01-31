@@ -65,9 +65,7 @@
                 </th:block>
             </div>
             <div class="comment-form">
-                <input type="hidden" name="coid" id="coid">
                 <input type="hidden" name="cid" id="cid" th:value="${article.cid}">
-                <input type="hidden" name="_csrf_token" id="csrf_token" th:value="${_csrf_token}">
                 <div class="field">
                     <textarea id="comment-content" required="required" class="form-control" name="content" placeholder="请输入评论信息..." cols="30" rows="7"></textarea>
                 </div>

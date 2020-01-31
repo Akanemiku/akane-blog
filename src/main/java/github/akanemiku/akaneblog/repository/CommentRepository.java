@@ -11,5 +11,6 @@ public interface CommentRepository extends JpaRepository<Comment,Integer> {
      * @param cid
      * @return
      */
+    // TODO 评论状态判断
     List<Comment> findAllByCid(Integer cid);
 }

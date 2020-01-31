@@ -9,14 +9,15 @@ import github.akanemiku.akaneblog.model.Meta;
 import github.akanemiku.akaneblog.service.CommentService;
 import github.akanemiku.akaneblog.service.ContentService;
 import github.akanemiku.akaneblog.service.MetaService;
+import github.akanemiku.akaneblog.utils.APIResponse;
+import github.akanemiku.akaneblog.utils.IPUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -91,11 +92,11 @@ public class HomeController {
 
     @GetMapping(value = "/tags/{name}")
     public String tagsDetail(@PathVariable("name") String name,
-                             HttpServletRequest request){
-        Meta tags = metaService.getMetaByNameAndType(Types.TAG.getType(),name);
+                             HttpServletRequest request) {
+        Meta tags = metaService.getMetaByNameAndType(Types.TAG.getType(), name);
         List<Content> articles = contentService.getArticleByTag(tags);
-        request.setAttribute("articles",articles);
-        request.setAttribute("tags",tags.getName());
+        request.setAttribute("articles", articles);
+        request.setAttribute("tags", tags.getName());
         return "blog/tags_detail";
     }
 
@@ -105,18 +106,45 @@ public class HomeController {
     }
 
     @GetMapping(value = "/detail/{cid}")
-    public String detail( @PathVariable("cid") Integer cid,
-                          HttpServletRequest request){
+    public String detail(@PathVariable("cid") Integer cid,
+                         HttpServletRequest request) {
         //获取文章内容
         Content article = contentService.getArticleById(cid);
         request.setAttribute("article", article);
-        // TODO 更新文章点击
+        //更新点击次数
+        updateArticleHits(article,article.getHits());
         //获取评论
         List<Comment> comments = commentService.getCommentsByCid(cid);
         request.setAttribute("comments", comments);
         return "blog/detail";
     }
 
+    private void updateArticleHits(Content article, Integer hits) {
+        if (hits == null) {
+            hits = 0;
+        }
+        // TODO 防护措施
+        article.setHits(hits+1);
+        System.out.println(article.toString());
+        contentService.updateContent(article);
+    }
 
+    @PostMapping("/comment")
+    @ResponseBody
+    public APIResponse comment(Comment comment,
+                               HttpServletRequest request){
+        // TODO 各种权限的判断和内容限制，前端+后台，可能直接通过接口进行攻击故后台也需拦截
+        System.out.println(comment.toString());
+
+        String ref = request.getHeader("Referer");
+        if (StringUtils.isBlank(ref)){
+            return APIResponse.failure("访问失败");
+        }
+        // TODO 可能存在的输入异常，如用户输入特殊字符、html等，需要对数据进行处理
+
+        comment.setIp(IPUtils.getIpAddress(request));
+        commentService.insertComment(comment);
+        return APIResponse.success();
+    }
 
 }

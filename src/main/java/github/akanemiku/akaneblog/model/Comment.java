@@ -41,7 +41,7 @@ public class Comment implements Serializable {
     /**
      * 评论者邮件
      */
-    private String mail;
+    private String email;
     /**
      * 评论者网址
      */

@@ -12,6 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,6 +23,7 @@ public class ContentServiceImpl implements ContentService {
     ContentRepository contentRepository;
     @Autowired
     RelationRepository relationRepository;
+
 
     @Override
     public Page<Content> getAllArticles(Pageable pageable) {
@@ -49,5 +51,11 @@ public class ContentServiceImpl implements ContentService {
         // TODO cid为空异常
         Optional<Content> content = contentRepository.findById(cid);
         return content.get();
+    }
+
+    @Override
+    @Transactional
+    public void updateContent(Content content) {
+        contentRepository.save(content);
     }
 }
