@@ -8,6 +8,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ContentServiceImpl implements ContentService {
 
@@ -17,5 +19,11 @@ public class ContentServiceImpl implements ContentService {
     @Override
     public Page<Content> getAllArticles(Pageable pageable) {
         return contentRepository.findAll(pageable);
+    }
+
+    @Override
+    public List<Content> getArticleByCategory(String category) {
+        // TODO category为空异常
+        return contentRepository.getArticleByCategory(category);
     }
 }

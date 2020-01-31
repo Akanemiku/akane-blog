@@ -2,6 +2,7 @@ package github.akanemiku.akaneblog.service.impl;
 
 import github.akanemiku.akaneblog.constant.WebConst;
 import github.akanemiku.akaneblog.dto.MetaDTO;
+import github.akanemiku.akaneblog.model.Meta;
 import github.akanemiku.akaneblog.repository.MetaRepository;
 import github.akanemiku.akaneblog.repository.dao.MetaDao;
 import github.akanemiku.akaneblog.service.MetaService;
@@ -42,5 +43,11 @@ public class MetaServiceImpl implements MetaService {
     @Override
     public Long getMetasCountByType(String type) {
         return metaRepository.getMetasCountByType(type);
+    }
+
+    @Override
+    public Meta getMetaByNameAndType(String type, String name) {
+        // TODO name为空异常
+        return metaRepository.getMetaByNameAndType(type,name);
     }
 }

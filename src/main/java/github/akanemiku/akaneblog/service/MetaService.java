@@ -1,6 +1,7 @@
 package github.akanemiku.akaneblog.service;
 
 import github.akanemiku.akaneblog.dto.MetaDTO;
+import github.akanemiku.akaneblog.model.Meta;
 
 import java.util.List;
 
@@ -15,4 +16,6 @@ public interface MetaService {
     List<MetaDTO> getMetaList(String type, String orderBy, int limit);
 
     Long getMetasCountByType(String type);
+
+    Meta getMetaByNameAndType(String type,String name);
 }
