@@ -3,8 +3,10 @@ package github.akanemiku.akaneblog.controller;
 import github.akanemiku.akaneblog.constant.Types;
 import github.akanemiku.akaneblog.constant.WebConst;
 import github.akanemiku.akaneblog.dto.MetaDTO;
+import github.akanemiku.akaneblog.model.Comment;
 import github.akanemiku.akaneblog.model.Content;
 import github.akanemiku.akaneblog.model.Meta;
+import github.akanemiku.akaneblog.service.CommentService;
 import github.akanemiku.akaneblog.service.ContentService;
 import github.akanemiku.akaneblog.service.MetaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,8 @@ public class HomeController {
     private ContentService contentService;
     @Autowired
     private MetaService metaService;
+    @Autowired
+    private CommentService commentService;
 
     @GetMapping("/")
     public String index(@RequestParam(value = "pageNo", defaultValue = "0", required = false) Integer pageNo,
@@ -74,11 +78,6 @@ public class HomeController {
         return "blog/category_detail";
     }
 
-    @GetMapping(value = "/about")
-    public String about() {
-        return "blog/about";
-    }
-
     @GetMapping(value = "/tags")
     public String tags(HttpServletRequest request) {
         // 获取标签
@@ -99,6 +98,25 @@ public class HomeController {
         request.setAttribute("tags",tags.getName());
         return "blog/tags_detail";
     }
+
+    @GetMapping(value = "/about")
+    public String about() {
+        return "blog/about";
+    }
+
+    @GetMapping(value = "/detail/{cid}")
+    public String detail( @PathVariable("cid") Integer cid,
+                          HttpServletRequest request){
+        //获取文章内容
+        Content article = contentService.getArticleById(cid);
+        request.setAttribute("article", article);
+        // TODO 更新文章点击
+        //获取评论
+        List<Comment> comments = commentService.getCommentsByCid(cid);
+        request.setAttribute("comments", comments);
+        return "blog/detail";
+    }
+
 
 
 }

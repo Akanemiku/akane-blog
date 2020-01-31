@@ -13,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ContentServiceImpl implements ContentService {
@@ -41,5 +42,12 @@ public class ContentServiceImpl implements ContentService {
             return contentRepository.findArticleByTags(Converter.RelationListToCidList(relationList));
         }
         return null;
+    }
+
+    @Override
+    public Content getArticleById(Integer cid) {
+        // TODO cid为空异常
+        Optional<Content> content = contentRepository.findById(cid);
+        return content.get();
     }
 }

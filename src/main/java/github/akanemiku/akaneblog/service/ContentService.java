@@ -25,4 +25,6 @@ public interface ContentService {
      * @return
      */
     List<Content> getArticleByTag(Meta tag);
+
+    Content getArticleById(Integer cid);
 }

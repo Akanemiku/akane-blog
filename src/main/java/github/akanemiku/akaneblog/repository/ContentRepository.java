@@ -31,6 +31,12 @@ public interface ContentRepository extends JpaRepository<Content, Integer> {
     @Query(nativeQuery = true, value = "select * from t_content where categories=?1")
     List<Content> findArticleByCategory(@Param("category") String category);
 
+    /**
+     * 通过文章id列表获取所有文章
+     * @param cid
+     * @return
+     */
     @Query(nativeQuery = true,value = "select * from t_content where cid in :cid")
     List<Content> findArticleByTags(@Param("cid") List<Integer> cid);
+
 }
