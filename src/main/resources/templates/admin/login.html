@@ -59,7 +59,7 @@
         </div>
         <div class="panel-body">
             <form class="form-horizontal m-t-20" method="post" id="loginForm" onsubmit="return checkForm()">
-                <input type="hidden" name="_csrf_token" th:value="${_csrf_token}"/>
+                <!--<input type="hidden" name="_csrf_token" th:value="Ykf16O_sImiMy4LJdCSMA2"/>-->
                 <div class="form-group">
                     <div class="col-xs-12">
                         <input class=" input-lg input-border" value="admin" name="username" type="text" required=""
@@ -99,10 +99,12 @@
     /*<![CDATA[*/
     var tale = new $.tale();
     function checkForm() {
+        console.log("login");
         tale.post({
             url: '/admin/login',
             data: $("#loginForm").serialize(),
             success: function (result) {
+                console.log("success");
                 if (result && result.code == 'success') {
                     window.location.href = '/admin/index';
                 } else {

@@ -6,6 +6,7 @@ import github.akanemiku.akaneblog.model.Relation;
 import github.akanemiku.akaneblog.repository.ContentRepository;
 import github.akanemiku.akaneblog.repository.MetaRepository;
 import github.akanemiku.akaneblog.repository.dao.MetaDao;
+import github.akanemiku.akaneblog.utils.SpecialUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +37,7 @@ public class MethodTest {
 
     @Test
     public void test2(){
-
+        System.out.println(SpecialUtil.MD5encode("123456"));
     }
 
 }

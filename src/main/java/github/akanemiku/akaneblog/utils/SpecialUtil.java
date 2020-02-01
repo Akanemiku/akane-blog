@@ -10,7 +10,7 @@ import java.security.NoSuchAlgorithmException;
 public class SpecialUtil {
 
     /**
-     * MD5加密
+     * MD5加密 32位小写
      * @param source 数据源
      * @return  加密字符串
      */

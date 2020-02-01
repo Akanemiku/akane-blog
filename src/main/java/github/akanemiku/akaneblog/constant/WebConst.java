@@ -20,7 +20,7 @@ public class WebConst {
      */
     public static String LOGIN_SESSION_KEY = "login_user";
 
-    public static final String USER_IN_COOKIE = "S_L_ID";
+    public static final String USER_IN_COOKIE = "USER_ID";
 
     /**
      * aes加密加盐

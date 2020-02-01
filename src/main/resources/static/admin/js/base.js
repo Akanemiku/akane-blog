@@ -126,6 +126,8 @@ $.tale.prototype.alertBox = function (options) {
  * @param options   参数
  */
 $.tale.prototype.post = function (options) {
+    // console.log("tale");
+    // console.log(JSON.stringify(options));
     var self = this;
     $.ajax({
         type: 'POST',
@@ -134,11 +136,13 @@ $.tale.prototype.post = function (options) {
         async: options.async || false,
         dataType: 'json',
         success: function (result) {
+            // console.log("tale success "+JSON.stringify(result));
             self.hideLoading();
             options.success && options.success(result);
         },
         error: function () {
-            //
+            // console.log("tale error");
+            // 后台controller中不加@ResponseBody会到这里来，fuck this bug
         }
     });
 };

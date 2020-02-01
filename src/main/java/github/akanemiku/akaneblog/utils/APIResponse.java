@@ -39,8 +39,4 @@ public class APIResponse<T> {
     public static APIResponse failure(String msg) {
         return new APIResponse(FAILURE,msg);
     }
-
-    public static APIResponse widthCode(String errorCode) {
-        return new APIResponse(errorCode);
-    }
 }
