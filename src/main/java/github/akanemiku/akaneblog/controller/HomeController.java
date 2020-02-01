@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -112,7 +113,7 @@ public class HomeController {
         Content article = contentService.getArticleById(cid);
         request.setAttribute("article", article);
         //更新点击次数
-        updateArticleHits(article,article.getHits());
+        updateArticleHits(article, article.getHits());
         //获取评论
         List<Comment> comments = commentService.getCommentsByCid(cid);
         request.setAttribute("comments", comments);
@@ -124,7 +125,7 @@ public class HomeController {
             hits = 0;
         }
         // TODO 多点防护措施
-        article.setHits(hits+1);
+        article.setHits(hits + 1);
         System.out.println(article.toString());
         contentService.updateContent(article);
     }
@@ -132,12 +133,12 @@ public class HomeController {
     @PostMapping("/comment")
     @ResponseBody
     public APIResponse comment(Comment comment,
-                               HttpServletRequest request){
+                               HttpServletRequest request) {
         // TODO 各种权限的判断和内容限制，前端+后台，可能直接通过接口进行攻击故后台也需拦截
         System.out.println(comment.toString());
 
         String ref = request.getHeader("Referer");
-        if (StringUtils.isBlank(ref)){
+        if (StringUtils.isBlank(ref)) {
             return APIResponse.failure("访问失败");
         }
         // TODO 可能存在的输入异常，如用户输入特殊字符、html等，需要对数据进行处理

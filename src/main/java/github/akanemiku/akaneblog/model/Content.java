@@ -33,6 +33,7 @@ public class Content implements Serializable {
     /**
      * 内容生成时的GMT unix时间戳
      */
+    @Column(name = "created")
     private Integer created;
     /**
      * 内容更改时的GMT unix时间戳
