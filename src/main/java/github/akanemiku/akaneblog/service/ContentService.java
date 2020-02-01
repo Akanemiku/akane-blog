@@ -33,5 +33,15 @@ public interface ContentService {
      */
     Content getArticleById(Integer cid);
 
+    /**
+     * 更新文章
+     * @param content
+     */
     void updateContent(Content content);
+
+    /**
+     * 获取文章总数
+     * @return
+     */
+    Long getContentsCount();
 }

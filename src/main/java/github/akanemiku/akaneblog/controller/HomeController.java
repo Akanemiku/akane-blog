@@ -123,7 +123,7 @@ public class HomeController {
         if (hits == null) {
             hits = 0;
         }
-        // TODO 防护措施
+        // TODO 多点防护措施
         article.setHits(hits+1);
         System.out.println(article.toString());
         contentService.updateContent(article);
@@ -141,7 +141,7 @@ public class HomeController {
             return APIResponse.failure("访问失败");
         }
         // TODO 可能存在的输入异常，如用户输入特殊字符、html等，需要对数据进行处理
-
+        // TODO 连续评论禁止
         comment.setIp(IPUtils.getIpAddress(request));
         commentService.insertComment(comment);
         return APIResponse.success();

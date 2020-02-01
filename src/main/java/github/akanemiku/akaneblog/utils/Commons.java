@@ -60,6 +60,7 @@ public class Commons {
 
     /**
      * 格式化unix时间戳为日期
+     * thymeleaf中使用
      * @param unixTime
      * @param patten
      * @return
@@ -166,14 +167,14 @@ public class Commons {
 
     /**
      * 显示文章内容，转换markdown为HTML
-     * @param value
+     * @param markdown
      * @return
      */
-    public static String article(String value) {
-        if (StringUtils.isNotBlank(value)) {
-            value = value.replace("<!--more-->", "\r\n");
-            value = value.replace("<!-- more -->", "\r\n");
-            return SpecialUtil.mdToHtml(value);
+    public static String article(String markdown) {
+        if (StringUtils.isNotBlank(markdown)) {
+            markdown = markdown.replace("<!--more-->", "\r\n");
+            markdown = markdown.replace("<!-- more -->", "\r\n");
+            return SpecialUtil.markdownToHtml(markdown);
         }
         return "";
     }

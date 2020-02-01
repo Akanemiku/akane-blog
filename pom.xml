@@ -103,16 +103,22 @@
             <artifactId>nekohtml</artifactId>
             <version>1.9.22</version>
         </dependency>
-        <!--markdown处理-->
+        <!--markdown转html-->
         <dependency>
-            <groupId>com.atlassian.commonmark</groupId>
-            <artifactId>commonmark</artifactId>
-            <version>0.8.0</version>
+            <groupId>com.vladsch.flexmark</groupId>
+            <artifactId>flexmark</artifactId>
+            <version>0.26.4</version>
         </dependency>
         <dependency>
-            <groupId>com.atlassian.commonmark</groupId>
-            <artifactId>commonmark-ext-gfm-tables</artifactId>
-            <version>0.8.0</version>
+            <groupId>com.vladsch.flexmark</groupId>
+            <artifactId>flexmark-util</artifactId>
+            <version>0.26.4</version>
+        </dependency>
+        <!--markdown表格渲染-->
+        <dependency>
+            <groupId>com.vladsch.flexmark</groupId>
+            <artifactId>flexmark-ext-tables</artifactId>
+            <version>0.26.4</version>
         </dependency>
         <!--servlet-->
         <dependency>

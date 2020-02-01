@@ -58,4 +58,9 @@ public class ContentServiceImpl implements ContentService {
     public void updateContent(Content content) {
         contentRepository.save(content);
     }
+
+    @Override
+    public Long getContentsCount() {
+        return contentRepository.findContentsCount();
+    }
 }

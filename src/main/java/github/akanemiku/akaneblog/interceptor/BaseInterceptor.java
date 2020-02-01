@@ -1,6 +1,10 @@
 package github.akanemiku.akaneblog.interceptor;
 
+import github.akanemiku.akaneblog.constant.Types;
 import github.akanemiku.akaneblog.constant.WebConst;
+import github.akanemiku.akaneblog.dto.MetaDTO;
+import github.akanemiku.akaneblog.service.ContentService;
+import github.akanemiku.akaneblog.service.MetaService;
 import github.akanemiku.akaneblog.utils.Commons;
 import github.akanemiku.akaneblog.utils.UUID;
 
@@ -14,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -37,12 +42,12 @@ public class BaseInterceptor implements HandlerInterceptor {
 
 //    @Autowired
 //    private AdminCommons adminCommons;
-//
-//    @Autowired
-//    private MetaService metaService;
-//
-//    @Autowired
-//    private SiteService siteService;
+
+    @Autowired
+    private MetaService metaService;
+
+    @Autowired
+    private ContentService contentService;
 
     @Autowired
     private HttpSession session;
@@ -90,19 +95,19 @@ public class BaseInterceptor implements HandlerInterceptor {
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object o, ModelAndView view) throws Exception {
 //        OptionsDomain ov = optionService.getOptionByName("site_record");
-//        // 分类总数
-//        Long categoryCount = metaService.findMetasCountByType(Types.CATEGORY.getType());
-//        // 标签总数
-//        Long tagCount = metaService.findMetasCountByType(Types.TAG.getType());
-//        // 获取文章总数
-//        StatisticsDto statistics = siteService.getStatistics();
-//        // 获取友情链接
-//        List<MetaDTO> links = metaService.getMetaList(Types.LINK.getType(),null,WebConst.MAX_POSTS);
+        // 分类总数
+        Long categoryCount = metaService.getMetasCountByType(Types.CATEGORY.getType());
+        // 标签总数
+        Long tagCount = metaService.getMetasCountByType(Types.TAG.getType());
+        // 获取文章总数
+        Long countentCount = contentService.getContentsCount();
+        // 获取友情链接
+        List<MetaDTO> links = metaService.getMetaList(Types.LINK.getType(),null,WebConst.MAX_POSTS);
 
-//        session.setAttribute("categoryCount",categoryCount);
-//        session.setAttribute("tagCount",tagCount);
-//        session.setAttribute("articleCount",statistics.getArticles());
-//        session.setAttribute("links",links);
+        session.setAttribute("categoryCount",categoryCount);
+        session.setAttribute("tagCount",tagCount);
+        session.setAttribute("articleCount",countentCount);
+        session.setAttribute("links",links);
         request.setAttribute("commons", commons);
 //        request.setAttribute("option", ov);
 //        request.setAttribute("adminCommons", adminCommons);

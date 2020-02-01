@@ -38,4 +38,7 @@ public interface ContentRepository extends JpaRepository<Content, Integer> {
      */
     @Query(nativeQuery = true,value = "select * from t_content where cid in :cid")
     List<Content> findArticleByTags(@Param("cid") List<Integer> cid);
+
+    @Query(nativeQuery = true,value = "select count(*) from t_content")
+    Long findContentsCount();
 }
