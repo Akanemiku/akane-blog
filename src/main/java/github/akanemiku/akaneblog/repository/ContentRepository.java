@@ -33,12 +33,27 @@ public interface ContentRepository extends JpaRepository<Content, Integer> {
 
     /**
      * 通过文章id列表获取所有文章
+     *
      * @param cid
      * @return
      */
-    @Query(nativeQuery = true,value = "select * from t_content where cid in :cid")
+    @Query(nativeQuery = true, value = "select * from t_content where cid in :cid")
     List<Content> findArticleByTags(@Param("cid") List<Integer> cid);
 
-    @Query(nativeQuery = true,value = "select count(*) from t_content")
+    /**
+     * 获取文章总数
+     *
+     * @return
+     */
+    @Query(nativeQuery = true, value = "select count(*) from t_content")
     Long findContentsCount();
+
+    /**
+     * 获得指定数目文章，按时间倒序
+     *
+     * @param limit
+     * @return
+     */
+    @Query(nativeQuery = true, value = "select * from t_content order by created desc limit 0,?1")
+    List<Content> findAllByLimit(@Param("limit") Integer limit);
 }
