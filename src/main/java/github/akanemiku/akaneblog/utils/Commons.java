@@ -3,6 +3,7 @@ package github.akanemiku.akaneblog.utils;
 import com.vdurmont.emoji.EmojiParser;
 import github.akanemiku.akaneblog.constant.WebConst;
 import github.akanemiku.akaneblog.model.Log;
+import github.akanemiku.akaneblog.model.Meta;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
@@ -19,10 +20,60 @@ import java.util.Random;
 @Component
 public class Commons {
 
+    /**
+     * 添加新日志
+     * @param action
+     * @param data
+     * @param authorId
+     * @param request
+     * @return
+     */
     public static Log newLog(String action, Object data, Integer authorId, HttpServletRequest request){
         return new Log(null,action,JsonUtil.toJsonString(data),authorId, IPUtils.getIpAddress(request),DateUtil.getCurrentUnixTime());
     }
 
+    /**
+     * 判断category和cat的交集
+     * @param category
+     * @param cats
+     * @return
+     */
+    public static boolean exist_cat(Meta category, String cats) {
+        String[] arr = StringUtils.split(cats, ",");
+        if (null != arr && arr.length > 0) {
+            for (String c : arr) {
+                if (c.trim().equals(category.getName())) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
+     * 定义颜色样式数组
+     */
+    private static final String[] COLORS = {"default", "primary", "success", "info", "warning", "danger", "inverse", "purple", "pink"};
+
+    /**
+     * 随机样式
+     * @return
+     */
+    public static String rand_color() {
+        int r = random(0, COLORS.length - 1);
+        return COLORS[r];
+    }
+
+    /**
+     * 随机数
+     * @param min
+     * @param max
+     * @return
+     */
+    public static int random(int min, int max) {
+        Random random = new Random();
+        return random.nextInt(max) % (max - min + 1) + min;
+    }
     /**
      * 获取随机数数
      * @param max

@@ -97,7 +97,7 @@
                                     <th:block th:unless="${null == categories}">
                                         <th:block th:each="c : ${categories}">
                                             <option th:value="${c.name}" th:text="${c.name}"
-                                                    th:selected="${null !=contents and adminCommons.exist_cat(c, contents.categories)}?true:false"></option>
+                                                    th:selected="${null !=contents and commons.exist_cat(c, contents.categories)}?true:false"></option>
                                         </th:block>
                                     </th:block>
                                 </select>

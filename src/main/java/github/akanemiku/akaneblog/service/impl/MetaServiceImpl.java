@@ -41,6 +41,11 @@ public class MetaServiceImpl implements MetaService {
     }
 
     @Override
+    public List<Meta> getMetasByType(String type) {
+        return metaRepository.findAllByType(type);
+    }
+
+    @Override
     public Long getMetasCountByType(String type) {
         return metaRepository.findMetasCountByType(type);
     }
