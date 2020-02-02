@@ -16,7 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -127,7 +126,7 @@ public class HomeController {
         // TODO 多点防护措施
         article.setHits(hits + 1);
         System.out.println(article.toString());
-        contentService.updateContent(article);
+        contentService.saveContent(article);
     }
 
     @PostMapping("/comment")

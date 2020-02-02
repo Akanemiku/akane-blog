@@ -55,12 +55,17 @@ public class ContentServiceImpl implements ContentService {
 
     @Override
     @Transactional
-    public void updateContent(Content content) {
+    public void saveContent(Content content) {
         contentRepository.save(content);
     }
 
     @Override
     public Long getContentsCount() {
         return contentRepository.findContentsCount();
+    }
+
+    @Override
+    public void deleteArticleById(Integer cid) {
+        contentRepository.deleteById(cid);
     }
 }

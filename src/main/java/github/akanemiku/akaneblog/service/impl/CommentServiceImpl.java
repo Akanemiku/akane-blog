@@ -30,5 +30,6 @@ public class CommentServiceImpl implements CommentService {
         comment.setStatus(CommentEnum.STATUS_BLANK.getType());
         comment.setCreated(DateUtil.getCurrentUnixTime());
         commentRepository.save(comment);
+        // TODO setCommentsNum
     }
 }
