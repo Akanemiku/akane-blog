@@ -55,7 +55,7 @@
                     <li class="dropdown">
                         <a th:href="@{index.html}" class="dropdown-toggle profile" data-toggle="dropdown" aria-expanded="true">
                             <img th:src="${commons.gravatar(session.login_user.email)}" alt="user-img" class="img-circle"/>
-                            <span class="username" th:text="${session.login_user.username}"></span><span class="caret"></span>
+                            <span class="username" th:text="${session.login_user.screenName}"></span><span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu">
                             <li>

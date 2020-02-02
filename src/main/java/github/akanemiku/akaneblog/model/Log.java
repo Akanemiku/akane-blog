@@ -1,6 +1,8 @@
 package github.akanemiku.akaneblog.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -11,6 +13,8 @@ import java.io.Serializable;
 @Data
 @Entity
 @Table(name = "t_log")
+@NoArgsConstructor
+@AllArgsConstructor
 public class Log implements Serializable {
     /**
      * 日志主键

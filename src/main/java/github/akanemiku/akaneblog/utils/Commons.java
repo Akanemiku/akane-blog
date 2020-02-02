@@ -2,10 +2,12 @@ package github.akanemiku.akaneblog.utils;
 
 import com.vdurmont.emoji.EmojiParser;
 import github.akanemiku.akaneblog.constant.WebConst;
+import github.akanemiku.akaneblog.model.Log;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -16,6 +18,11 @@ import java.util.Random;
  */
 @Component
 public class Commons {
+
+    public static Log newLog(String action, Object data, Integer authorId, HttpServletRequest request){
+        return new Log(null,action,JsonUtil.toJsonString(data),authorId, IPUtils.getIpAddress(request),DateUtil.getCurrentUnixTime());
+    }
+
     /**
      * 获取随机数数
      * @param max

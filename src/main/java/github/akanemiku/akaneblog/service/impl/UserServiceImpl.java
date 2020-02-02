@@ -10,6 +10,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -22,6 +24,7 @@ public class UserServiceImpl implements UserService {
             throw new InternalException(ErrorEnum.USERNAME_PASSWORD_IS_EMPTY);
         password = SpecialUtil.MD5encode(password);
         User user = userRepository.findByUsername(username);
+        System.out.println("login: "+user.toString());
         if(null==user)
             throw new InternalException(ErrorEnum.USERNAME_PASSWORD_ERROR);
         if (password != null && password.equals(user.getPassword())){
@@ -30,5 +33,16 @@ public class UserServiceImpl implements UserService {
         else{
             throw new InternalException(ErrorEnum.USERNAME_PASSWORD_ERROR);
         }
+    }
+
+    @Override
+    public User getUserById(Integer uid) {
+        Optional<User> user = userRepository.findById(uid);
+        return user.get();
+    }
+
+    @Override
+    public void saveUser(User user) {
+        userRepository.save(user);
     }
 }

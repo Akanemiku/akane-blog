@@ -36,12 +36,13 @@ public class AuthController {
         try{
             // 调用Service登录方法
             User user = userService.login(username,password);
-            // 设置用户信息session
+            // 设置登录用户session
             request.getSession().setAttribute(WebConst.LOGIN_SESSION_KEY, user);
             // 判断是否勾选记住我
             if (StringUtils.isNotBlank(remember_me)) {
                 CookieUtil.setCookie(response,WebConst.USER_IN_COOKIE, String.valueOf(user.getUid()));
             }
+            // TODO 写入日志
         }catch (InternalException e){
             // TODO 多次输入密码限制
             // TODO 错误类型不符判断
