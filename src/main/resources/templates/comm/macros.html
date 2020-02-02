@@ -28,40 +28,44 @@
     <div class="clearfix">
         <ul class="pagination m-b-5 pull-right">
 
-            <th:block th:if="${pageInfo.pageNum != 1}">
+            <th:block th:if="${pageInfo.getNumber() != 0}">
                 <li>
-                    <a th:href="@{'?page='+${pageInfo.firstPage}}">首页</a>
+                    <a th:href="@{'?pageNo='+${0}}">首页</a>
                 </li>
             </th:block>
 
-            <li th:if="${pageInfo.hasPreviousPage}">
-                <a th:href="@{'?page='+${pageInfo.prePage}}" aria-label="Previous">
+            <!--上一页-->
+            <li th:if="${pageInfo.hasPrevious()}">
+                <a th:href="@{'?pageNo='+${pageInfo.getNumber()-1}}" aria-label="Previous">
                     <i class="fa fa-angle-left"></i>&nbsp;上一页
                 </a>
             </li>
 
-            <th:block th:each="nav : ${pageInfo.navigatepageNums}">
-                <li th:class="${nav==pageInfo.pageNum}?'active disabled':''">
-                    <a th:href="@{'?page='+${nav}}" th:text="${nav}"></a>
+            <!--页码数字-->
+            <!--通过遍历0到n-1获得每个页并进行判断是否为当前页-->
+            <th:block th:each="nav : ${#numbers.sequence(0,pageInfo.getTotalPages()-1)}">
+                <li th:class="${nav==pageInfo.getNumber()}?'active disabled':''">
+                    <a th:href="@{'?pageNo='+${nav}}" th:text="${nav+1}"></a>
                 </li>
             </th:block>
 
-            <th:block th:if="${pageInfo.hasNextPage}">
+            <!--下一页-->
+            <th:block th:if="${pageInfo.hasNext()}">
                 <li>
-                    <a th:href="@{'?page='+${pageInfo.nextPage}}" aria-label="Next">
+                    <a th:href="@{'?pageNo='+${pageInfo.getNumber()+1}}" aria-label="Next">
                         下一页&nbsp;<i class="fa fa-angle-right"></i>
                     </a>
                 </li>
             </th:block>
 
-            <th:block th:if="${pageInfo.pages != pageInfo.pageNum}">
+            <th:block th:if="${pageInfo.getTotalPages()-1 != pageInfo.getNumber()}">
                 <li>
-                    <a th:href="@{'?page='+${pageInfo.lastPage}}">最后一页</a>
+                    <a th:href="@{'?pageNo='+${pageInfo.getTotalPages()-1}}">最后一页</a>
                 </li>
             </th:block>
 
             <li>
-                <span th:text="'共'+${pageInfo.pages}+'页'"></span>
+                <span th:text="'共'+${pageInfo.getTotalPages()}+'页'"></span>
             </li>
         </ul>
     </div>

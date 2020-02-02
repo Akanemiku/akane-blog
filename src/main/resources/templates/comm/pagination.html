@@ -4,7 +4,7 @@
 <nav class="pagination" th:fragment="pageNav(pageInfo)">
     <!--前一页-->
     <th:block th:if="${pageInfo.hasPrevious()}">
-        <a class="extend prev" rel="prev" th:href="@{'?pageNo='+${pageInfo.previousPageable()}}">
+        <a class="extend prev" rel="prev" th:href="@{'?pageNo='+${pageInfo.getNumber()-1}}">
             <i class="fa fa-angle-left"></i>
         </a>
     </th:block>
@@ -19,7 +19,7 @@
 
     <!--后一页-->
     <th:block th:if="${pageInfo.hasNext()}">
-        <a class="extend next" rel="next" th:href="@{'?pageNo='+${pageInfo.nextPageable()}}">
+        <a class="extend next" rel="next" th:href="@{'?pageNo='+${pageInfo.getNumber()+1}}">
             <i class="fa fa-angle-right"></i>
         </a>
     </th:block>
