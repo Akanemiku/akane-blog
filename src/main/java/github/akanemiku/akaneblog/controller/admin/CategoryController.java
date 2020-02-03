@@ -38,6 +38,8 @@ public class CategoryController {
         Meta meta = new Meta();
         meta.setName(cname);
         meta.setMid(mid);
+        meta.setSlug(cname);
+        meta.setType(Types.CATEGORY.getType());
         try{
             metaService.saveMeta(meta);
         }catch (InternalException e){
@@ -46,6 +48,18 @@ public class CategoryController {
             return APIResponse.failure(msg);
         }
 
+        return APIResponse.success();
+    }
+
+    @PostMapping(value = "/delete")
+    @ResponseBody
+    public APIResponse deleteCategory( @RequestParam(name = "mid", required = true) Integer mid){
+        try {
+            metaService.deleteById(mid);// TODO 未验证！！！！！！！！！！！！！！！！！！！！！！！
+        } catch (Exception e) {
+            e.printStackTrace();
+            return APIResponse.failure(e.getMessage());
+        }
         return APIResponse.success();
     }
 }

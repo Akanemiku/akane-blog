@@ -5,8 +5,10 @@ import github.akanemiku.akaneblog.model.Content;
 import github.akanemiku.akaneblog.model.Relation;
 import github.akanemiku.akaneblog.repository.ContentRepository;
 import github.akanemiku.akaneblog.repository.MetaRepository;
+import github.akanemiku.akaneblog.repository.RelationRepository;
 import github.akanemiku.akaneblog.repository.dao.MetaDao;
 import github.akanemiku.akaneblog.utils.SpecialUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +29,8 @@ public class MethodTest {
     private ContentRepository contentRepository;
     @Autowired
     private MetaRepository metaRepository;
+    @Autowired
+    private RelationRepository relationRepository;
     @Test
     public void test1(){
         Map<String, Object> paraMap = new HashMap<>();
@@ -44,7 +48,38 @@ public class MethodTest {
 
     @Test
     public void tes3(){
+        List<Relation> relationList = relationRepository.findRelationByMid(54);
+        System.out.println(relationList.toString());
+    }
 
+    private String reMeta(String name, String metas) {
+        String[] ms = StringUtils.split(metas,",");
+        StringBuilder buf = new StringBuilder();
+        for (String m : ms) {
+            if (!name.equals(m)) {
+                buf.append(",").append(m);
+            }
+        }
+        if (buf.length() > 0) {
+            return buf.substring(1);
+        }
+        return "";
+    }
+
+    @Test
+    public void test4(){
+        String str = reMeta("默认分类","默认分类,测试分类");
+        System.out.println(str);
+        str = reMeta("tag2","tag1,tag2,tag3");
+        System.out.println(str);
+        str = reMeta("隔热个人","说的发顺丰,隔热个人,问题问题");
+        System.out.println(str);
+
+    }
+
+    @Test
+    public void test5(){
+        relationRepository.deleteByMid(67);
     }
 
 }

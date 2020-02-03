@@ -53,4 +53,10 @@ public interface MetaService {
      * @param type
      */
     void saveMeta(Integer cid, String names, String type);
+
+    /**
+     * 根据id删除项目，且连带删除所属文章
+     * @param mid
+     */
+    void deleteById(Integer mid);
 }
