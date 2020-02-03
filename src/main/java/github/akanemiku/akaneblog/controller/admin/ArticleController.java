@@ -156,6 +156,7 @@ public class ArticleController {
         article.setSlug(slug);
         article.setContent(content);
         article.setCreated(DateUtil.getCurrentUnixTime());
+        article.setModified(DateUtil.getCurrentUnixTime());
         article.setType(type);
         article.setStatus(status);
         article.setHits(1);
@@ -164,6 +165,8 @@ public class ArticleController {
         article.setTags(type.equals(Types.ARTICLE.getType()) ? tags : null);
         article.setCategories(type.equals(Types.ARTICLE.getType()) ? categories : null);
         article.setAllowComment(allowComment ? 1 : 0);
+
+        System.out.println(article.toString());
         // 添加文章
         contentService.saveContent(article);
 

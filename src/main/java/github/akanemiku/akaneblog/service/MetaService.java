@@ -39,4 +39,18 @@ public interface MetaService {
      * @return
      */
     Meta getMetaByNameAndType(String type, String name);
+
+    /**
+     * 添加或修改项目
+     * @param meta
+     */
+    void saveMeta(Meta meta);
+
+    /**
+     * 用于文章发布时，批量添加或修改项目
+     * @param cid
+     * @param names
+     * @param type
+     */
+    void saveMeta(Integer cid, String names, String type);
 }

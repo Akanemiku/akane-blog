@@ -37,7 +37,14 @@ public interface ContentService {
     Content getArticleById(Integer cid);
 
     /**
-     * 更新文章
+     * 更新文章点击率专用
+     *
+     * @param content
+     */
+    void updateContent(Content content);
+
+    /**
+     * 后台新增及更新文章，涉及到关联表
      *
      * @param content
      */

@@ -7,7 +7,7 @@ public enum Types {
     // 标签
     TAG("tag"),
     // 文章
-    ARTICLE("article"),
+    ARTICLE("post"),
     // token
     TOKEN("token"),
     // 友情链接

@@ -25,8 +25,8 @@ public interface MetaRepository extends JpaRepository<Meta, Integer> {
      * @param name
      * @return
      */
-    @Query(nativeQuery = true, value = "select * from t_meta where type=?1 and name=?2")
-    Meta findMetaByNameAndType(@Param("type") String type, @Param("name") String name);
+    @Query(nativeQuery = true, value = "select * from t_meta where name=?1 and type=?2")
+    Meta findMetaByNameAndType(@Param("name") String name,@Param("type") String type);
 
     /**
      * 查找某一类型的所有项目
@@ -35,4 +35,7 @@ public interface MetaRepository extends JpaRepository<Meta, Integer> {
      * @return
      */
     List<Meta> findAllByType(@Param("type") String type);
+
+    @Query(nativeQuery = true, value = "select mid from t_meta order by mid desc limit 1")
+    Integer findLastId();
 }

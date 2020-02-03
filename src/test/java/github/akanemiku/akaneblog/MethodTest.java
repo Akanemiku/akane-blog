@@ -25,6 +25,8 @@ public class MethodTest {
     private MetaDao dao;
     @Autowired
     private ContentRepository contentRepository;
+    @Autowired
+    private MetaRepository metaRepository;
     @Test
     public void test1(){
         Map<String, Object> paraMap = new HashMap<>();
@@ -38,6 +40,11 @@ public class MethodTest {
     @Test
     public void test2(){
         System.out.println(SpecialUtil.MD5encode("123456"));
+    }
+
+    @Test
+    public void tes3(){
+
     }
 
 }

@@ -126,7 +126,7 @@ public class HomeController {
         // TODO 多点防护措施
         article.setHits(hits + 1);
         System.out.println(article.toString());
-        contentService.saveContent(article);
+        contentService.updateContent(article);
     }
 
     @PostMapping("/comment")

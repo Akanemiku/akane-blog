@@ -1,11 +1,14 @@
 package github.akanemiku.akaneblog.service.impl;
 
+import github.akanemiku.akaneblog.constant.Types;
 import github.akanemiku.akaneblog.model.Content;
 import github.akanemiku.akaneblog.model.Meta;
 import github.akanemiku.akaneblog.model.Relation;
 import github.akanemiku.akaneblog.repository.ContentRepository;
+import github.akanemiku.akaneblog.repository.MetaRepository;
 import github.akanemiku.akaneblog.repository.RelationRepository;
 import github.akanemiku.akaneblog.service.ContentService;
+import github.akanemiku.akaneblog.service.MetaService;
 import github.akanemiku.akaneblog.utils.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -23,6 +26,8 @@ public class ContentServiceImpl implements ContentService {
     ContentRepository contentRepository;
     @Autowired
     RelationRepository relationRepository;
+    @Autowired
+    MetaService metaService;
 
 
     @Override
@@ -55,8 +60,29 @@ public class ContentServiceImpl implements ContentService {
 
     @Override
     @Transactional
-    public void saveContent(Content content) {
+    public void updateContent(Content content) {
         contentRepository.save(content);
+    }
+
+    @Override
+    @Transactional
+    public void saveContent(Content content) {
+        // TODO 异常判断
+        //获取标签
+        String tags = content.getTags();
+        //获取分类
+        String categories = content.getCategories();
+        //保存文章
+        contentRepository.save(content);
+        // 添加分类和标签
+        int cid;
+        if(content.getCid()!=null){
+            cid = content.getCid();
+        }else{
+            cid = contentRepository.findLastId();
+        }
+        metaService.saveMeta(cid, tags, Types.TAG.getType());
+        metaService.saveMeta(cid, categories, Types.CATEGORY.getType());
     }
 
     @Override
