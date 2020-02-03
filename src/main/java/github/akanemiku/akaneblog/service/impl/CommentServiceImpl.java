@@ -2,7 +2,9 @@ package github.akanemiku.akaneblog.service.impl;
 
 import github.akanemiku.akaneblog.enums.CommentEnum;
 import github.akanemiku.akaneblog.model.Comment;
+import github.akanemiku.akaneblog.model.Content;
 import github.akanemiku.akaneblog.repository.CommentRepository;
+import github.akanemiku.akaneblog.repository.ContentRepository;
 import github.akanemiku.akaneblog.service.CommentService;
 import github.akanemiku.akaneblog.utils.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,8 @@ import java.util.Optional;
 public class CommentServiceImpl implements CommentService {
     @Autowired
     private CommentRepository commentRepository;
+    @Autowired
+    private ContentRepository contentRepository;
 
     @Override
     public List<Comment> getCommentsByCid(Integer cid) {
@@ -27,9 +31,13 @@ public class CommentServiceImpl implements CommentService {
 
         // TODO 内容判断
         // TODO 可设置作者，需要后端管理联动
+        // 插入评论
         comment.setStatus(CommentEnum.STATUS_BLANK.getType());
         comment.setCreated(DateUtil.getCurrentUnixTime());
         commentRepository.save(comment);
-        // TODO setCommentsNum
+        // 文章评论总数+1
+        Content article = contentRepository.findById(comment.getCid()).get();
+        article.setCommentsNum(article.getCommentsNum()+1);
+        contentRepository.save(article);
     }
 }

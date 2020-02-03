@@ -83,6 +83,20 @@ public class ArticleController {
         return "admin/article_edit";
     }
 
+    /**
+     * 修改文章
+     * @param cid
+     * @param title
+     * @param titlePic
+     * @param slug
+     * @param content
+     * @param type
+     * @param status
+     * @param tags
+     * @param categories
+     * @param allowComment
+     * @return
+     */
     @PostMapping("/modify")
     @ResponseBody
     public APIResponse modifyArticle(@RequestParam(name = "cid", required = true) Integer cid,
@@ -112,6 +126,19 @@ public class ArticleController {
         return APIResponse.success();
     }
 
+    /**
+     * 发布文章
+     * @param title
+     * @param titlePic
+     * @param slug
+     * @param content
+     * @param type
+     * @param status
+     * @param categories
+     * @param tags
+     * @param allowComment
+     * @return
+     */
     @PostMapping(value = "/publish")
     @ResponseBody
     public APIResponse publishArticle(@RequestParam(name = "title", required = true) String title,
