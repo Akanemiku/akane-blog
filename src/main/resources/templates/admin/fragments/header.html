@@ -54,7 +54,7 @@
                 <ul class="nav navbar-nav navbar-right pull-right">
                     <li class="dropdown">
                         <a th:href="@{index.html}" class="dropdown-toggle profile" data-toggle="dropdown" aria-expanded="true">
-                            <img th:src="${commons.gravatar(session.login_user.email)}" alt="user-img" class="img-circle"/>
+                            <img th:src="${commons.getIdenticons()}" alt="user-img" class="img-circle"/>
                             <span class="username" th:text="${session.login_user.screenName}"></span><span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu">
@@ -91,10 +91,6 @@
                        th:class="${active}=='article'?'waves-effect active':'waves-effect'"><i
                             class="fa fa-list" aria-hidden="true"></i><span> 文章管理 </span></a>
                 </li>
-                <!--<li th:class="${active}=='page'?'active':''">-->
-                    <!--<a th:href="@{/admin/page}" th:class="${active}=='page'?'waves-effect active':'waves-effect'"><i-->
-                            <!--class="fa fa-file-text" aria-hidden="true"></i><span> 页面管理 </span></a>-->
-                <!--</li>-->
                 <li th:class="${active}=='comments'?'active':''">
                     <a th:href="@{/admin/comments}"
                        th:class="${active}=='comments'?'waves-effect active':'waves-effect'"><i
@@ -104,11 +100,6 @@
                     <a th:href="@{/admin/category}"
                        th:class="${active}=='category'?'waves-effect active':'waves-effect'"><i
                             class="fa fa-tags" aria-hidden="true"></i><span> 分类/标签 </span></a>
-                </li>
-                <li th:class="${active}=='attach'?'active':''">
-                    <a th:href="@{/admin/attach}"
-                       th:class="${active}=='attach'?'waves-effect active':'waves-effect'"><i
-                            class="fa fa-cloud-upload" aria-hidden="true"></i><span> 文件管理 </span></a>
                 </li>
                 <li th:class="${active}=='links'?'active':''">
                     <a th:href="@{/admin/links}" th:class="${active}=='links'?'waves-effect active':'waves-effect'"><i

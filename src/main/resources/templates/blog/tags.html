@@ -19,12 +19,12 @@
                         <th:block th:if="${tags}">
                             <th:block th:each="tag : ${tags}">
                                 <th:block th:if="${tag.count != 0}">
-                                    <a th:href="@{'/tags/'} + ${tag.name}" th:style="'font-size:'+ ${commons.randomInt(15,'px')}+';color:#555' ">
+                                    <a th:href="@{'/tags/'} + ${tag.name}" th:style="'font-size:'+ ${commons.random(15,'px')}+';color:#555' ">
                                         <th:block th:text="${tag.name}"></th:block>
                                     </a>
                                 </th:block>
                                 <th:block th:unless="${tag.count != 0}">
-                                    <a th:style="'font-size:'+ ${commons.randomInt(15,'px')}+';color:#555' ">
+                                    <a th:style="'font-size:'+ ${commons.random(15,'px')}+';color:#555' ">
                                         <th:block th:text="${tag.name}"></th:block>
                                     </a>
                                 </th:block>

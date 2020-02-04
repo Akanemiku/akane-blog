@@ -33,6 +33,23 @@ public class Commons {
     }
 
     /**
+     * 数组转字符串
+     * @param arr 数组
+     * @return String
+     */
+    public static String arrayToString(String[] arr) {
+        StringBuffer buffer = new StringBuffer();
+        String[] temp = arr;
+        int length = arr.length;
+
+        for (int i = 0; i < length; i++) {
+            String item = temp[i];
+            buffer.append(",").append(item);
+        }
+        return buffer.length() > 0 ? buffer.substring(1) : buffer.toString();
+    }
+
+    /**
      * 判断category和cat的交集
      * @param category
      * @param cats
@@ -60,59 +77,24 @@ public class Commons {
      * @return
      */
     public static String rand_color() {
-        int r = random(0, COLORS.length - 1);
+        int r = RandomUtil.genNumIncludeMinAndMax(0, COLORS.length - 1);
         return COLORS[r];
     }
 
     /**
-     * 随机数
-     * @param min
-     * @param max
+     * 带后缀生成指定范围的随机整数
+     * @param num
      * @return
      */
-    public static int random(int min, int max) {
-        Random random = new Random();
-        return random.nextInt(max) % (max - min + 1) + min;
-    }
-    /**
-     * 获取随机数数
-     * @param max
-     * @param str
-     * @return
-     */
-    public static String random(int max, String str) {
-        return UUID.random(1,max) + str;
+    public static String random(int num,String suf) {
+        return  RandomUtil.genNumIncludeMinAndMax(1,num)+suf;
     }
 
-    public static String random(Long seed, int max, String str) {
-        if (seed == null) {
-            return random(max, str);
-        }
-        Random random = new Random(seed);
-        return random.nextInt(max) +str;
-    }
 
-    /**
-     * 生成指定范围的随机整数
-     * @param member
-     * @return
-     */
-    public static String randomInt(int member,String suf) {
-        Random random = new Random();
-        return random.nextInt(member) + member + suf;
-    }
-
-    /**
-     * 返回gitHub头像地址
-     * @param email     邮箱
-     * @return  头像链接地址
-     */
-    public static String gravatar(String email) {
+    public static String getIdenticons() {
         String avatarUrl = "https://github.com/identicons/";
-        if (StringUtils.isBlank(email)) {
-            email = "864655735@qq.com";
-        }
-        String hash = SpecialUtil.MD5encode(email.trim().toLowerCase());
+        String hash = SpecialUtil.MD5encode(
+                RandomUtil.getAlphanumericString(RandomUtil.genNum(0,10)));
         return avatarUrl + hash + ".png";
     }
 
