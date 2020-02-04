@@ -17,6 +17,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -69,6 +70,7 @@ public class MetaServiceImpl implements MetaService {
     }
 
     @Override
+    @Transactional
     public void saveMeta(Meta meta) {
         // 通过项目名和类型查找有没有存在的
         Meta temp = metaRepository.findMetaByNameAndType(meta.getName(),meta.getType());
@@ -91,6 +93,12 @@ public class MetaServiceImpl implements MetaService {
     }
 
     @Override
+    public void saveLink(Meta meta) {
+        metaRepository.save(meta);
+    }
+
+    @Override
+    @Transactional
     public void saveMeta(Integer cid, String names, String type) {
         if(null==cid || StringUtils.isBlank(names) || StringUtils.isBlank(type))
             throw new InternalException(ErrorEnum.PARAM_IS_EMPTY);
@@ -122,6 +130,7 @@ public class MetaServiceImpl implements MetaService {
     }
 
     @Override
+    @Transactional
     public void deleteById(Integer mid) {
         if(null==mid)
             throw new InternalException(ErrorEnum.PARAM_IS_EMPTY);

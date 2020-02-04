@@ -41,10 +41,16 @@ public interface MetaService {
     Meta getMetaByNameAndType(String type, String name);
 
     /**
-     * 添加或修改项目
+     * 用于目录及标签，添加或修改项目
      * @param meta
      */
     void saveMeta(Meta meta);
+
+    /**
+     * 用于链接，添加或修改项目
+     * @param meta
+     */
+    void saveLink(Meta meta);
 
     /**
      * 用于文章发布时，批量添加或修改项目

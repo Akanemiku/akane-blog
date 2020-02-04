@@ -55,7 +55,7 @@ public class CategoryController {
     @ResponseBody
     public APIResponse deleteCategory( @RequestParam(name = "mid", required = true) Integer mid){
         try {
-            metaService.deleteById(mid);// TODO 未验证！！！！！！！！！！！！！！！！！！！！！！！
+            metaService.deleteById(mid);
         } catch (Exception e) {
             e.printStackTrace();
             return APIResponse.failure(e.getMessage());
