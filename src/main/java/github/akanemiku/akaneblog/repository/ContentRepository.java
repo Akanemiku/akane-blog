@@ -64,4 +64,5 @@ public interface ContentRepository extends JpaRepository<Content, Integer> {
      */
     @Query(nativeQuery = true, value = "select cid from t_content order by cid desc limit 1")
     Integer findLastId();
+
 }
