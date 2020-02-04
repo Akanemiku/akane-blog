@@ -81,8 +81,12 @@ public class ContentServiceImpl implements ContentService {
         }else{
             cid = contentRepository.findLastId();
         }
-        metaService.saveMeta(cid, tags, Types.TAG.getType());
-        metaService.saveMeta(cid, categories, Types.CATEGORY.getType());
+        if(tags!=null){
+            metaService.saveMeta(cid, tags, Types.TAG.getType());
+        }
+        if(categories!=null){
+            metaService.saveMeta(cid, categories, Types.CATEGORY.getType());
+        }
     }
 
     @Override
