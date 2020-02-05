@@ -31,4 +31,9 @@ public class OptionServiceImpl implements OptionService {
             });
         }
     }
+
+    @Override
+    public Option getByName(String name) {
+        return optionRepository.findById(name).get();
+    }
 }

@@ -17,4 +17,11 @@ public interface OptionService {
      * @param options
      */
     void saveOptions(Map<String,String> options);
+
+    /**
+     * 根据key查找
+     * @param name
+     * @return
+     */
+    Option getByName(String name);
 }

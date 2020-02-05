@@ -249,15 +249,5 @@ public class Commons {
         return map;
     }
 
-    /**
-     * 判断分页中是否有数据
-     * @param pageInfo
-     * @return
-     */
-    public static boolean is_empty(Page pageInfo) {
-        return pageInfo == null || (pageInfo.getContent() == null) || (pageInfo.getContent().size() == 0);
-    }
-
-
 
 }

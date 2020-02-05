@@ -3,8 +3,10 @@ package github.akanemiku.akaneblog.interceptor;
 import github.akanemiku.akaneblog.constant.Types;
 import github.akanemiku.akaneblog.constant.WebConst;
 import github.akanemiku.akaneblog.dto.MetaDTO;
+import github.akanemiku.akaneblog.model.Option;
 import github.akanemiku.akaneblog.service.ContentService;
 import github.akanemiku.akaneblog.service.MetaService;
+import github.akanemiku.akaneblog.service.OptionService;
 import github.akanemiku.akaneblog.utils.Commons;
 import github.akanemiku.akaneblog.utils.UUID;
 
@@ -27,21 +29,17 @@ import java.util.Map;
 @Component
 public class BaseInterceptor implements HandlerInterceptor {
 
-//    private static final Logger LOGGER = LoggerFactory.getLogger(BaseInterceptor.class);
     private static final String USER_AGENT = "User-Agent";
 
 
 //    @Autowired
 //    private UserService userService;
 //
-//    @Autowired
-//    private OptionService optionService;
+    @Autowired
+    private OptionService optionService;
 
     @Autowired
     private Commons commons;
-
-//    @Autowired
-//    private AdminCommons adminCommons;
 
     @Autowired
     private MetaService metaService;
@@ -51,10 +49,6 @@ public class BaseInterceptor implements HandlerInterceptor {
 
     @Autowired
     private HttpSession session;
-
-
-//    private MapCache cache = MapCache.single();
-
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object o) throws Exception {
@@ -94,7 +88,7 @@ public class BaseInterceptor implements HandlerInterceptor {
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object o, ModelAndView view) throws Exception {
-//        OptionsDomain ov = optionService.getOptionByName("site_record");
+        Option option = optionService.getByName("site_record");
         // 分类总数
         Long categoryCount = metaService.getMetasCountByType(Types.CATEGORY.getType());
         // 标签总数
@@ -109,21 +103,21 @@ public class BaseInterceptor implements HandlerInterceptor {
         session.setAttribute("articleCount",countentCount);
         session.setAttribute("links",links);
         request.setAttribute("commons", commons);
-//        request.setAttribute("option", ov);
-//        request.setAttribute("adminCommons", adminCommons);
-//        initSiteConfig(request);
+        request.setAttribute("option", option);
+        //加载配置项
+        initSiteConfig();
     }
 
-//    private void initSiteConfig(HttpServletRequest request) {
-//        if (WebConst.initConfig.isEmpty()) {
-//            List<OptionsDomain> options = optionService.getOptions();
-//            Map<String, String> querys = new HashMap<>();
-//            options.forEach(option -> {
-//                querys.put(option.getName(),option.getValue());
-//            });
-//            WebConst.initConfig = querys;
-//        }
-//    }
+    private void initSiteConfig() {
+        if (WebConst.initConfig.isEmpty()) {
+            List<Option> options = optionService.getOptions();
+            Map<String, String> querys = new HashMap<>();
+            options.forEach(option -> {
+                querys.put(option.getName(),option.getValue());
+            });
+            WebConst.initConfig = querys;
+        }
+    }
 
     @Override
     public void afterCompletion(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, Exception e) throws Exception {

@@ -1,10 +1,14 @@
 package github.akanemiku.akaneblog.controller.admin;
 
 import github.akanemiku.akaneblog.constant.WebConst;
+import github.akanemiku.akaneblog.enums.LogEnum;
 import github.akanemiku.akaneblog.exception.InternalException;
+import github.akanemiku.akaneblog.model.Log;
 import github.akanemiku.akaneblog.model.User;
+import github.akanemiku.akaneblog.service.LogService;
 import github.akanemiku.akaneblog.service.UserService;
 import github.akanemiku.akaneblog.utils.APIResponse;
+import github.akanemiku.akaneblog.utils.Commons;
 import github.akanemiku.akaneblog.utils.CookieUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +26,8 @@ public class AuthController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private LogService logService;
 
     @GetMapping(value = "/login")
     public String login() {
@@ -44,7 +50,9 @@ public class AuthController {
             if (StringUtils.isNotBlank(remember_me)) {
                 CookieUtil.setCookie(response, WebConst.USER_IN_COOKIE, String.valueOf(user.getUid()));
             }
-            // TODO 写入日志
+            Log log = Commons.newLog(LogEnum.LOGIN.getAction(),user.getUsername()+" 用户",user.getUid(),request);
+            logService.insertLog(log);
+
         } catch (InternalException e) {
             // TODO 多次输入密码限制
             // TODO 错误类型不符判断
