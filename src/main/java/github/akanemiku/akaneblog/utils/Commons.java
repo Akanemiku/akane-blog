@@ -4,11 +4,17 @@ import com.vdurmont.emoji.EmojiParser;
 import github.akanemiku.akaneblog.constant.WebConst;
 import github.akanemiku.akaneblog.model.Log;
 import github.akanemiku.akaneblog.model.Meta;
+import github.akanemiku.akaneblog.service.ContentService;
+import github.akanemiku.akaneblog.service.MetaService;
+import github.akanemiku.akaneblog.service.OptionService;
+import github.akanemiku.akaneblog.service.impl.OptionServiceImpl;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;

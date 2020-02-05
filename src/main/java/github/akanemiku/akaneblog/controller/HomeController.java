@@ -40,7 +40,6 @@ public class HomeController {
         Pageable pageable = PageRequest.of(pageNo, pageSize);
         Page<Content> articles = contentService.getAllArticles(pageable);
         request.setAttribute("articles", articles);
-
         return "blog/home";
     }
 
