@@ -1,6 +1,7 @@
 package github.akanemiku.akaneblog.utils;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -10,6 +11,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+@Component
 public class CookieUtil {
     public static final int COOKIE_MAX_AGE = 7 * 24 * 3600;
     public static final int COOKIE_HALF_HOUR = 30 * 60;

@@ -29,6 +29,25 @@ spring:
         login-username: akane
         login-password: 6458
 
+  redis:
+    host: 47.100.93.218
+    port: 6379
+    password:
+    #超时时间(毫秒)
+    timeout: 3600
+    # Redis默认情况下有16个分片，这里配置具体使用的分片，默认是0
+    database: 0
+    lettuce:
+      pool:
+        # 最大活跃链接数(使用负值表示没有限制) 默认8
+        max-active: 8
+        # 最大阻塞等待时间(使用负值表示没有限制) 默认 -1
+        max-wait: -1
+        # 最大空闲连接数 默认8
+        max-idle: 8
+        # 最小空闲连接数 默认0
+        min-idle: 0
+
   thymeleaf:
     prefix: classpath:/templates/
     check-template-location: true
@@ -46,3 +65,6 @@ spring:
 mybatis:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: github.akanemiku.akaneblog.model
+
+swagger:
+  show: true

@@ -1,9 +1,11 @@
 package github.akanemiku.akaneblog.utils;
 
 import org.apache.commons.lang3.RandomStringUtils;
+import org.springframework.stereotype.Component;
 
 import java.util.Random;
 
+@Component
 public class RandomUtil {
     /**
      * 生成指定区间随机数 (min, max)

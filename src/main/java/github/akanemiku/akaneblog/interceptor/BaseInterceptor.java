@@ -8,8 +8,8 @@ import github.akanemiku.akaneblog.service.ContentService;
 import github.akanemiku.akaneblog.service.MetaService;
 import github.akanemiku.akaneblog.service.OptionService;
 import github.akanemiku.akaneblog.utils.Commons;
-import github.akanemiku.akaneblog.utils.UUID;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -46,7 +46,6 @@ public class BaseInterceptor implements HandlerInterceptor {
 
     @Autowired
     private ContentService contentService;
-
     @Autowired
     private HttpSession session;
 
@@ -74,7 +73,6 @@ public class BaseInterceptor implements HandlerInterceptor {
 //            response.sendRedirect(request.getContextPath() + "/admin/login");
 //            return false;
 //        }
-
         // 设置GET请求的token
         if (request.getMethod().equals("GET")) {
 //            String csrf_token = UUID.UU64();
@@ -88,6 +86,8 @@ public class BaseInterceptor implements HandlerInterceptor {
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object o, ModelAndView view) throws Exception {
+        // TODO 移到工具类中，在controller中加载
+        //获得网站备案
         Option option = optionService.getByName("site_record");
         // 分类总数
         Long categoryCount = metaService.getMetasCountByType(Types.CATEGORY.getType());

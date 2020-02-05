@@ -8,6 +8,7 @@ import github.akanemiku.akaneblog.repository.MetaRepository;
 import github.akanemiku.akaneblog.repository.RelationRepository;
 import github.akanemiku.akaneblog.repository.dao.MetaDao;
 import github.akanemiku.akaneblog.utils.Commons;
+import github.akanemiku.akaneblog.utils.RedisUtil;
 import github.akanemiku.akaneblog.utils.SpecialUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
@@ -24,8 +25,17 @@ import java.util.Map;
 @SpringBootTest
 @RunWith(SpringRunner.class)
 public class MethodTest {
+    @Autowired
+    private RedisUtil redis;
     @Test
     public void test1(){
+        redis.set("a","111",10);
+        redis.set("bbb",12345);
+        redis.set("login_status",2,15);
+        System.out.println(redis.get("a"));
+        System.out.println(redis.get("bbb"));
+        Integer login_status = (Integer) redis.get("login_status");
+        System.out.println(login_status);
     }
 
 }
