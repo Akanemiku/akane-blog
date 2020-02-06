@@ -54,6 +54,7 @@
 - [ ] 1. 使用JWT+SpringSecurity进行权限校验
 - [ ] 2. 接口防护，现仅在前端进行基础防护
 - [ ] 3. 架构更改为SpringCloud，使用Eureka+Feign/Hystrix+Gateway
+- [ ] 4. 使用消息队列
 
 ### 5. 联系方式
 
