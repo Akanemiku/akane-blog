@@ -3,6 +3,7 @@
     <img src="./doc/favicon.png" alt="Akane Blog" style="width:200px;height:200px">
   </a>
 </p>
+
 # Akane Blog
 
 ![LICENSE](https://img.shields.io/badge/License-MIT-blue.svg)
