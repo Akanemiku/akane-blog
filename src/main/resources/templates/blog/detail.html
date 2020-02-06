@@ -50,7 +50,7 @@
                 <th:block th:if="${comments}">
                     <div th:each="comment : ${comments}" class="comment">
                         <a class="avatar">
-                            <img th:src="@{/blog/image/avatar.png}">
+                            <img th:src="${commons.getIdenticons()}">
                         </a>
                         <div class="content">
                             <a th:href="${comment.url}" target="_blank" class="author">

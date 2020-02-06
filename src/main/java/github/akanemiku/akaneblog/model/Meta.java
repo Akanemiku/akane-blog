@@ -47,6 +47,4 @@ public class Meta implements Serializable {
      * 项目排序
      */
     private Integer sort;
-
-    private Integer parent;
 }

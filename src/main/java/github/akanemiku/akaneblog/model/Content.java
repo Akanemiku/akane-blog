@@ -23,10 +23,6 @@ public class Content implements Serializable {
      */
     private String title;
     /**
-     * 标题图片
-     */
-    private String titlePic;
-    /**
      * 内容缩略名
      */
     private String slug;

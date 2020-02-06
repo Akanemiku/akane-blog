@@ -56,17 +56,9 @@ public class Comment implements Serializable {
      */
     private String client;
     /**
-     * 评论类型
-     */
-    private String type;
-    /**
      * 评论状态
      */
     private Integer status;
-    /**
-     * 父级评论
-     */
-    private Integer parent;
     /**
      * 评论内容
      */
