@@ -10,6 +10,8 @@ import github.akanemiku.akaneblog.repository.ContentRepository;
 import github.akanemiku.akaneblog.service.CommentService;
 import github.akanemiku.akaneblog.utils.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -25,38 +27,48 @@ public class CommentServiceImpl implements CommentService {
     private ContentRepository contentRepository;
 
     @Override
+    @Cacheable(value = "comment", key = "'commentsByCId_'+#p0")
     public List<Comment> getCommentsByCid(Integer cid) {
-        // TODO cid为空异常
+        if(cid==null)
+            throw new InternalException(ErrorEnum.PARAM_IS_EMPTY);
         return commentRepository.findAllByCid(cid);
     }
 
     @Override
+    @CacheEvict(value = "comment", allEntries = true)
     public void insertComment(Comment comment) {
-
-        // TODO 内容判断
+        if(comment==null)
+            throw new InternalException(ErrorEnum.PARAM_IS_EMPTY);
         // TODO 可设置作者，需要后端管理联动
         // 插入评论
         comment.setStatus(CommentEnum.UNCHECKED.getType());
         comment.setCreated(DateUtil.getCurrentUnixTime());
         commentRepository.save(comment);
         // 文章评论总数+1
-        Content article = contentRepository.findById(comment.getCid()).get();
-        article.setCommentsNum(article.getCommentsNum()+1);
-        contentRepository.save(article);
+        try{
+            Content article = contentRepository.findById(comment.getCid()).get();
+            article.setCommentsNum(article.getCommentsNum()+1);
+            contentRepository.save(article);
+        }catch (InternalException e){
+            throw new InternalException(ErrorEnum.ARTICLE_IS_NULL);
+        }
     }
 
     @Override
+    @Cacheable(value = "comment", key = "'allComments'")
     public Page<Comment> getAllComments(Pageable pageable) {
         return commentRepository.findAll(pageable);
     }
 
     @Override
+    @Cacheable(value = "comment", key = "'commentsById_'+#p0")
     public Comment getCommentById(Integer id) {
         return commentRepository.findById(id).get();
     }
 
     @Override
     @Transactional
+    @CacheEvict(value = "comment", allEntries = true)
     public void updateComment(Integer coid, String status) {
         if (null == coid)
             throw new InternalException(ErrorEnum.PARAM_IS_EMPTY);

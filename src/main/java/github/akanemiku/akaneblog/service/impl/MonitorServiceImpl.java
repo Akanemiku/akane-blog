@@ -9,6 +9,7 @@ import github.akanemiku.akaneblog.repository.ContentRepository;
 import github.akanemiku.akaneblog.repository.MetaRepository;
 import github.akanemiku.akaneblog.service.MonitorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,6 +26,7 @@ public class MonitorServiceImpl implements MonitorService {
 
 
     @Override
+    @Cacheable(value = "statistics", key = "'statistics'")
     public StatisticsDTO getStatistics() {
         // 文章总数
         Long articles = contentRepository.findContentsCount();
@@ -40,6 +42,7 @@ public class MonitorServiceImpl implements MonitorService {
     }
 
     @Override
+    @Cacheable(value = "statistics", key = "'newArticles_' + #p0")
     public List<Content> getNewArticles(Integer limit) {
         if (limit < 0 || limit > 10) {
             limit = 10;
@@ -48,6 +51,7 @@ public class MonitorServiceImpl implements MonitorService {
     }
 
     @Override
+    @Cacheable(value = "statistics", key = "'newComments_' + #p0")
     public List<Comment> getNewComment(Integer limit) {
         if (limit < 0 || limit > 10) {
             limit = 10;

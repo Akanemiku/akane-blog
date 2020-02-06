@@ -10,52 +10,19 @@
             <div id="posts" class="posts-expand">
                 <div class="post-block page" style="opacity: 1; display: block;">
                     <header class="post-header" style="opacity: 1; display: block; transform: translateY(0px);">
-                        <h1 class="post-title" itemprop="name headline">关于博主</h1>
+                        <h1 class="post-title" itemprop="name headline">关于</h1>
                     </header>
                     <div class="post-body" style="opacity: 1; display: block; transform: translateY(0px);">
-                        <h2>介绍</h2>
+                        <h2>开源地址</h2>
                         <blockquote>
                             <div>
-                                KyrieCao，博主，就读于湖南郴州某某专科学校，现就职于广州某某公司实习，从事开发工作，喜欢JAVA开发，同时也喜欢Web开发， 励志两年后成为一名合格的全栈开发工程师。
-                            </div>
-                        </blockquote>
-                        <h2>技能标签</h2>
-                        <ul>
-                            <li>
-                                <h4>后端</h4>
-                                <blockquote>
-                                    <div>
-                                        JAVA、PHP、Python
-                                        <br>
-                                        Spring、SpringMVC、SpringBoot、MyBatis
-                                        <br>
-                                        MySQL、Redis、JSP、Thymeleaf
-                                        <br>
-                                        Linux、Apache、Nginx
-                                    </div>
-                                </blockquote>
-                            </li>
-                            <li>
-                                <h4>前端</h4>
-                                <blockquote>
-                                    <div>
-                                        HTML5、CSS3、Javascript
-                                        <br>
-                                        JQuery、Vue、Bootstrap、ElementUI
-                                    </div>
-                                </blockquote>
-                            </li>
-                        </ul>
-                        <h2>个人爱好</h2>
-                        <blockquote>
-                            <div>
-                                没什么特别的爱好，看看NBA，打打篮球，关注一下体育比赛，平时看看技术论坛。
+                                <a href="https://github.com/Akanemiku/akane-blog" target="_blank">akane-blog</a>
                             </div>
                         </blockquote>
                         <h2>联系</h2>
                         <ul>
-                            <li>QQ：864655735</li>
-                            <li>邮箱：KyrieCao@163.com</li>
+                            <li>QQ：806394913</li>
+                            <li>Mail：yux.liu@foxmail.com</li>
                             <th:block th:each="index : ${commons.social()}">
                                 <th:block th:if="${index.value} != null and ${index.value} != ''">
                                     <th:block th:switch="${index.key}">
@@ -77,7 +44,6 @@
                                     </th:block>
                                 </th:block>
                             </th:block>
-                            <li>博客园：<a href="http://www.cnblogs.com/KyrieCao/" target="_blank">http://www.cnblogs.com/KyrieCao/</a></li>
                         </ul>
                     </div>
                 </div>

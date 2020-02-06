@@ -15,6 +15,8 @@ import github.akanemiku.akaneblog.service.MetaService;
 import github.akanemiku.akaneblog.utils.Converter;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -35,11 +37,13 @@ public class ContentServiceImpl implements ContentService {
 
 
     @Override
+    @Cacheable(value = "articles",key = "'allArticles'")
     public Page<Content> getAllArticles(Pageable pageable) {
         return contentRepository.findAll(pageable);
     }
 
     @Override
+    @Cacheable(value = "article",key = "'articleByCategory_'+#p0")
     public List<Content> getArticleByCategory(String category) {
         if(category==null)
             throw new InternalException(ErrorEnum.PARAM_IS_EMPTY);
@@ -47,6 +51,7 @@ public class ContentServiceImpl implements ContentService {
     }
 
     @Override
+    @Cacheable(value = "article",key = "'articleByTag_'+#p0")
     public List<Content> getArticleByTag(Meta tag) {
         if(tag==null)
             throw new InternalException(ErrorEnum.PARAM_IS_EMPTY);
@@ -58,6 +63,7 @@ public class ContentServiceImpl implements ContentService {
     }
 
     @Override
+    @Cacheable(value = "article",key = "'articleById_'+#p0")
     public Content getArticleById(Integer cid) {
         if(cid==null)
             throw new InternalException(ErrorEnum.PARAM_IS_EMPTY);
@@ -67,12 +73,14 @@ public class ContentServiceImpl implements ContentService {
 
     @Override
     @Transactional
+    @CacheEvict(value = {"article","articles"}, allEntries = true, beforeInvocation = true)
     public void updateContent(Content content) {
         contentRepository.save(content);
     }
 
     @Override
     @Transactional
+    @CacheEvict(value = {"article","articles"}, allEntries = true, beforeInvocation = true)
     public void saveContent(Content content) {
         if(content==null)
             throw new InternalException(ErrorEnum.PARAM_IS_EMPTY);
@@ -113,6 +121,7 @@ public class ContentServiceImpl implements ContentService {
 
     @Override
     @Transactional
+    @CacheEvict(value = {"article","articles"}, allEntries = true, beforeInvocation = true)
     public void deleteArticleById(Integer cid) {
         contentRepository.deleteById(cid);
     }

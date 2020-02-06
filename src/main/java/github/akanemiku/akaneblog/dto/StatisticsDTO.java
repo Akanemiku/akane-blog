@@ -2,8 +2,10 @@ package github.akanemiku.akaneblog.dto;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 @Data
-public class StatisticsDTO {
+public class StatisticsDTO implements Serializable {
     /**
      * 文章数
      */

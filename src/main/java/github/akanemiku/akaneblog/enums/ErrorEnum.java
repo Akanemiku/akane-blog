@@ -18,6 +18,7 @@ public enum ErrorEnum {
     CONTENT_CAN_NOT_EMPTY(111,"文章内容不能为空"),
     CONTENT_IS_TOO_LONG(112,"文章字数超过限制"),
     TITLE_IS_TOO_LONG(113,"文章标题过长"),
+    ARTICLE_IS_NULL(114,"要评论的文章不存在"),
 
     // meta
     ADD_META_FAIL(130, "添加项目信息失败"),
