@@ -6,6 +6,7 @@ import github.akanemiku.akaneblog.service.OptionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Map;
 
@@ -21,6 +22,7 @@ public class OptionServiceImpl implements OptionService {
     }
 
     @Override
+    @Transactional
     public void saveOptions(Map<String, String> options) {
         if (null != options && !options.isEmpty()) {
             Option option = new Option();

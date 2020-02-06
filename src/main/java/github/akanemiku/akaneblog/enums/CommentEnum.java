@@ -9,8 +9,8 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum  CommentEnum {
-    STATUS_NORMAL("approved"),
-    STATUS_BLANK("not_audit");
+    CHECKED(1),
+    UNCHECKED(0);
 
-    private String type;
+    private Integer type;
 }

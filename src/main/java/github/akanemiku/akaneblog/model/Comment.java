@@ -54,7 +54,7 @@ public class Comment implements Serializable {
     /**
      * 评论者客户端
      */
-    private String agent;
+    private String client;
     /**
      * 评论类型
      */
@@ -62,7 +62,7 @@ public class Comment implements Serializable {
     /**
      * 评论状态
      */
-    private String status;
+    private Integer status;
     /**
      * 父级评论
      */

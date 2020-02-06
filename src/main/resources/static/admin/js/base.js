@@ -7,7 +7,7 @@ $.extend({
 });
 
 /**
- * tale alert删除  // todo: 减少耦合度,链式操作替代  2017-02-27
+ * tale alert删除
  * @param options
  */
 // $.tale.prototype.alert_del = function (options) {

@@ -19,6 +19,7 @@ public interface CommentRepository extends JpaRepository<Comment, Integer> {
      * @return
      */
     // TODO 评论状态判断
+    @Query(nativeQuery = true,value = "select * from t_comment where status = 1 and cid = ?1")
     List<Comment> findAllByCid(Integer cid);
 
     /**

@@ -1,6 +1,9 @@
 package github.akanemiku.akaneblog.service.impl;
 
 import github.akanemiku.akaneblog.constant.Types;
+import github.akanemiku.akaneblog.constant.WebConst;
+import github.akanemiku.akaneblog.enums.ErrorEnum;
+import github.akanemiku.akaneblog.exception.InternalException;
 import github.akanemiku.akaneblog.model.Content;
 import github.akanemiku.akaneblog.model.Meta;
 import github.akanemiku.akaneblog.model.Relation;
@@ -10,6 +13,7 @@ import github.akanemiku.akaneblog.repository.RelationRepository;
 import github.akanemiku.akaneblog.service.ContentService;
 import github.akanemiku.akaneblog.service.MetaService;
 import github.akanemiku.akaneblog.utils.Converter;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -37,13 +41,15 @@ public class ContentServiceImpl implements ContentService {
 
     @Override
     public List<Content> getArticleByCategory(String category) {
-        // TODO category为空异常
+        if(category==null)
+            throw new InternalException(ErrorEnum.PARAM_IS_EMPTY);
         return contentRepository.findArticleByCategory(category);
     }
 
     @Override
     public List<Content> getArticleByTag(Meta tag) {
-        // TODO tag为空异常
+        if(tag==null)
+            throw new InternalException(ErrorEnum.PARAM_IS_EMPTY);
         List<Relation> relationList = relationRepository.findRelationByMid(tag.getMid());
         if(null!=relationList&&relationList.size()>0){
             return contentRepository.findArticleByTags(Converter.RelationListToCidList(relationList));
@@ -53,7 +59,8 @@ public class ContentServiceImpl implements ContentService {
 
     @Override
     public Content getArticleById(Integer cid) {
-        // TODO cid为空异常
+        if(cid==null)
+            throw new InternalException(ErrorEnum.PARAM_IS_EMPTY);
         Optional<Content> content = contentRepository.findById(cid);
         return content.get();
     }
@@ -67,7 +74,17 @@ public class ContentServiceImpl implements ContentService {
     @Override
     @Transactional
     public void saveContent(Content content) {
-        // TODO 异常判断
+        if(content==null)
+            throw new InternalException(ErrorEnum.PARAM_IS_EMPTY);
+        if (StringUtils.isBlank(content.getTitle()))
+            throw new InternalException(ErrorEnum.TITLE_CAN_NOT_EMPTY);
+        if (content.getTitle().length() > WebConst.MAX_TITLE_COUNT)
+            throw new InternalException(ErrorEnum.TITLE_IS_TOO_LONG);
+        if (StringUtils.isBlank(content.getContent()))
+            throw new InternalException(ErrorEnum.CONTENT_CAN_NOT_EMPTY);
+        if (content.getContent().length() > WebConst.MAX_CONTENT_COUNT)
+            throw new InternalException(ErrorEnum.CONTENT_IS_TOO_LONG);
+
         //获取标签
         String tags = content.getTags();
         //获取分类
@@ -95,6 +112,7 @@ public class ContentServiceImpl implements ContentService {
     }
 
     @Override
+    @Transactional
     public void deleteArticleById(Integer cid) {
         contentRepository.deleteById(cid);
     }

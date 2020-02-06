@@ -20,12 +20,11 @@ public class WebConst {
      */
     public static String LOGIN_SESSION_KEY = "login_user";
 
+    /**
+     * cookie的key
+     */
     public static final String USER_IN_COOKIE = "USER_ID";
 
-    /**
-     * aes加密加盐
-     */
-    public static String AES_SALT = "0123456789abcdef";
     /**
      * 最大获取文章条数
      */
@@ -39,17 +38,11 @@ public class WebConst {
     /**
      * 文章内容最多可以输入的文字个数
      */
-    public static final int MAX_CONTENT_COUNT = 200000;
+    public static final int MAX_CONTENT_COUNT = 20000;
 
     /**
-     * 点击次数超过铄和更新到数据库
+     * 两次评论间间隔(s)
      */
-    public static final int HIT_EXEED = 10;
-
-    /**
-     * 上传文件最大1M
-     */
-    public static Integer MAX_FILE_SIZE = 1048576;
-
+    public static final int COMMENT_INTERVAL = 30;
 
 }

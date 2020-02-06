@@ -11,6 +11,7 @@ import github.akanemiku.akaneblog.service.ContentService;
 import github.akanemiku.akaneblog.service.MetaService;
 import github.akanemiku.akaneblog.utils.APIResponse;
 import github.akanemiku.akaneblog.utils.IPUtils;
+import github.akanemiku.akaneblog.utils.RedisUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -31,7 +32,16 @@ public class HomeController {
     private MetaService metaService;
     @Autowired
     private CommentService commentService;
+    @Autowired
+    private RedisUtil redis;
 
+    /**
+     * 博客主页
+     * @param pageNo 当前页码，从0开始
+     * @param pageSize 每页多少条数据
+     * @param request
+     * @return
+     */
     @GetMapping("/")
     public String index(@RequestParam(value = "pageNo", defaultValue = "0", required = false) Integer pageNo,
                         @RequestParam(value = "pageSize", defaultValue = "1", required = false) Integer pageSize,
@@ -43,6 +53,13 @@ public class HomeController {
         return "blog/home";
     }
 
+    /**
+     * 归档页
+     * @param pageNo 当前页码，从0开始
+     * @param pageSize 每页多少条数据
+     * @param request
+     * @return
+     */
     @GetMapping("/archives")
     public String archives(@RequestParam(value = "pageNo", defaultValue = "0", required = false) Integer pageNo,
                            @RequestParam(value = "pageSize", defaultValue = "1", required = false) Integer pageSize,
@@ -55,6 +72,11 @@ public class HomeController {
         return "blog/archives";
     }
 
+    /**
+     * 分类页
+     * @param request
+     * @return
+     */
     @GetMapping(value = "/categories")
     public String categories(HttpServletRequest request) {
         //获取category类型的所有数据
@@ -66,6 +88,12 @@ public class HomeController {
         return "blog/category";
     }
 
+    /**
+     * 显示某分类下所有文章
+     * @param name
+     * @param request
+     * @return
+     */
     @GetMapping(value = "/categories/{name}")
     public String categoriesDetail(@PathVariable("name") String name,
                                    HttpServletRequest request) {
@@ -78,6 +106,11 @@ public class HomeController {
         return "blog/category_detail";
     }
 
+    /**
+     * 标签页
+     * @param request
+     * @return
+     */
     @GetMapping(value = "/tags")
     public String tags(HttpServletRequest request) {
         // 获取标签
@@ -89,6 +122,12 @@ public class HomeController {
         return "blog/tags";
     }
 
+    /**
+     * 显示某标签下所有文章
+     * @param name
+     * @param request
+     * @return
+     */
     @GetMapping(value = "/tags/{name}")
     public String tagsDetail(@PathVariable("name") String name,
                              HttpServletRequest request) {
@@ -99,11 +138,21 @@ public class HomeController {
         return "blog/tags_detail";
     }
 
+    /**
+     * 关于页
+     * @return
+     */
     @GetMapping(value = "/about")
     public String about() {
         return "blog/about";
     }
 
+    /**
+     * 某文章详情
+     * @param cid
+     * @param request
+     * @return
+     */
     @GetMapping(value = "/detail/{cid}")
     public String detail(@PathVariable("cid") Integer cid,
                          HttpServletRequest request) {
@@ -139,9 +188,16 @@ public class HomeController {
         if (StringUtils.isBlank(ref)) {
             return APIResponse.failure("访问失败");
         }
+        //禁止连续评论，每30s才可评论一次
+        Object comment_status = redis.get(comment.getAuthor());
+        if(comment_status!=null){
+            return APIResponse.failure("您发表的评论太快了，请稍后再试！");
+        }else{
+            redis.set(comment.getAuthor(),IPUtils.getIpAddress(request),WebConst.COMMENT_INTERVAL);
+        }
         // TODO 可能存在的输入异常，如用户输入特殊字符、html等，需要对数据进行处理
-        // TODO 连续评论禁止
         comment.setIp(IPUtils.getIpAddress(request));
+        comment.setClient(request.getHeader("User-Agent"));
         commentService.insertComment(comment);
         return APIResponse.success();
     }

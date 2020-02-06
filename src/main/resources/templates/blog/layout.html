@@ -125,8 +125,16 @@
                 alert("内容不能为空");
                 return false;
             }
+            if(content.length>200){
+                alert("评论过长");
+                return false;
+            }
             if (null == author || "" == author || undefined == author) {
                 alert("姓名不能为空");
+                return false;
+            }
+            if(author.length>50){
+                alert("姓名过长");
                 return false;
             }
             if (null == email || "" == email || undefined == email) {
@@ -134,9 +142,8 @@
                 return false;
             }
             if (email_reg.test(email)){
-                alert("邮箱格式正确");
             }else{
-                alert("邮箱格式不正确");
+                alert("邮箱格式错误，请输入正确的邮箱");
                 return false;
             }
 

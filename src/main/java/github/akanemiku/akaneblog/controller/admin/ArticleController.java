@@ -109,20 +109,24 @@ public class ArticleController {
                                      @RequestParam(name = "tags", required = false) String tags,
                                      @RequestParam(name = "categories", required = false, defaultValue = "默认分类") String categories,
                                      @RequestParam(name = "allowComment", required = true) Boolean allowComment) {
-        Content article = contentService.getArticleById(cid);
-        article.setTitle(title);
-        article.setCid(cid);
-        article.setTitlePic(titlePic);
-        article.setSlug(slug);
-        article.setContent(content);
-        article.setModified(DateUtil.getCurrentUnixTime());
-        article.setType(type);
-        article.setStatus(status);
-        article.setTags(tags);
-        article.setCategories(categories);
-        article.setAllowComment(allowComment ? 1 : 0);
-        //更新文章
-        contentService.saveContent(article);
+        try{
+            Content article = contentService.getArticleById(cid);
+            article.setTitle(title);
+            article.setCid(cid);
+            article.setTitlePic(titlePic);
+            article.setSlug(slug);
+            article.setContent(content);
+            article.setModified(DateUtil.getCurrentUnixTime());
+            article.setType(type);
+            article.setStatus(status);
+            article.setTags(tags);
+            article.setCategories(categories);
+            article.setAllowComment(allowComment ? 1 : 0);
+            //更新文章
+            contentService.saveContent(article);
+        }catch (InternalError e){
+            return APIResponse.failure(e.getMessage());
+        }
         return APIResponse.success();
     }
 
@@ -150,25 +154,29 @@ public class ArticleController {
                                       @RequestParam(name = "categories", required = false, defaultValue = "默认分类") String categories,
                                       @RequestParam(name = "tags", required = false) String tags,
                                       @RequestParam(name = "allowComment", required = true) Boolean allowComment) {
-        Content article = new Content();
-        article.setTitle(title);
-        article.setTitlePic(titlePic);
-        article.setSlug(slug);
-        article.setContent(content);
-        article.setCreated(DateUtil.getCurrentUnixTime());
-        article.setModified(DateUtil.getCurrentUnixTime());
-        article.setType(type);
-        article.setStatus(status);
-        article.setHits(1);
-        article.setCommentsNum(0);
-        // 只允许博客文章有分类，防止作品被收入分类
-        article.setTags(type.equals(Types.ARTICLE.getType()) ? tags : null);
-        article.setCategories(type.equals(Types.ARTICLE.getType()) ? categories : null);
-        article.setAllowComment(allowComment ? 1 : 0);
+        try{
+            Content article = new Content();
+            article.setTitle(title);
+            article.setTitlePic(titlePic);
+            article.setSlug(slug);
+            article.setContent(content);
+            article.setCreated(DateUtil.getCurrentUnixTime());
+            article.setModified(DateUtil.getCurrentUnixTime());
+            article.setType(type);
+            article.setStatus(status);
+            article.setHits(1);
+            article.setCommentsNum(0);
+            // 只允许博客文章有分类，防止作品被收入分类
+            article.setTags(type.equals(Types.ARTICLE.getType()) ? tags : null);
+            article.setCategories(type.equals(Types.ARTICLE.getType()) ? categories : null);
+            article.setAllowComment(allowComment ? 1 : 0);
 
-        System.out.println(article.toString());
-        // 添加文章
-        contentService.saveContent(article);
+            System.out.println(article.toString());
+            // 添加文章
+            contentService.saveContent(article);
+        }catch (InternalError e){
+            return APIResponse.failure(e.getMessage());
+        }
 
         return APIResponse.success();
     }

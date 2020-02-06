@@ -65,13 +65,16 @@ public class MetaServiceImpl implements MetaService {
 
     @Override
     public Meta getMetaByNameAndType(String type, String name) {
-        // TODO name为空异常
+        if(StringUtils.isBlank(name)||StringUtils.isBlank(type))
+            throw new InternalException(ErrorEnum.PARAM_IS_EMPTY);
         return metaRepository.findMetaByNameAndType(name,type);
     }
 
     @Override
     @Transactional
     public void saveMeta(Meta meta) {
+        if(meta==null)
+            throw new InternalException(ErrorEnum.PARAM_IS_EMPTY);
         // 通过项目名和类型查找有没有存在的
         Meta temp = metaRepository.findMetaByNameAndType(meta.getName(),meta.getType());
         // 判断是否找到有相同的
@@ -93,7 +96,10 @@ public class MetaServiceImpl implements MetaService {
     }
 
     @Override
+    @Transactional
     public void saveLink(Meta meta) {
+        if(meta==null)
+            throw new InternalException(ErrorEnum.PARAM_IS_EMPTY);
         metaRepository.save(meta);
     }
 

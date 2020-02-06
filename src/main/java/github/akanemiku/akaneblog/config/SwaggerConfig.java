@@ -26,8 +26,8 @@ public class SwaggerConfig {
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 .title("Akane Blog APIs")
-                .contact(new Contact("Akane","null","yux.liu@foxmail.com"))
-                .version("v1.0")
+                .contact(new Contact("Akane","https://github.com/Akanemiku","yux.liu@foxmail.com"))
+                .version("v1.1")
                 .build();
     }
 }

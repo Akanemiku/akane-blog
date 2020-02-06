@@ -37,15 +37,15 @@
                                     <td><a th:href="@{${comment.url}}" target="_blank" th:text="${comment.url}"></a>
                                     </td>
                                     <td>
-                                        <th:block th:if="${comment.status == 'approved'}">
+                                        <th:block th:if="${comment.status == 1}">
                                             <span class="label label-success">审核通过</span>
                                         </th:block>
-                                        <th:block th:if="${comment.status == 'not_audit'}">
+                                        <th:block th:if="${comment.status == 0}">
                                             <span class="label label-default">未审核</span>
                                         </th:block>
                                     </td>
                                     <td>
-                                        <th:block th:if="${comment.status == 'not_audit'}">
+                                        <th:block th:if="${comment.status == 0}">
                                             <a href="javascript:void(0)" th:onclick="'updateStatus('+${comment.coid}+');'"
                                                class="btn btn-success btn-sm waves-effect waves-light m-b-5">
                                                 <i class="fa fa-check-square-o"></i>
@@ -100,7 +100,7 @@
             then: function () {
                 tale.post({
                     url: '/admin/comments/status',
-                    data: {coid: coid, status: "approved"},
+                    data: {coid: coid, status: 1},
                     success: function (result) {
                         if (result && result.code == 'success') {
                             tale.alertOkAndReload('评论状态设置成功');

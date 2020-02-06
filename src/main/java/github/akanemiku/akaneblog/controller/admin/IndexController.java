@@ -76,7 +76,6 @@ public class IndexController {
                                    HttpServletRequest request){
         // 获得登录用户
         User user = (User) request.getSession().getAttribute(WebConst.LOGIN_SESSION_KEY);
-        System.out.println("profile: "+user.toString());//
         User temp = userService.getUserById(user.getUid());
         temp.setScreenName(screenName);
         temp.setEmail(email);

@@ -10,6 +10,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Optional;
 
 @Service
@@ -24,13 +25,12 @@ public class UserServiceImpl implements UserService {
             throw new InternalException(ErrorEnum.USERNAME_PASSWORD_IS_EMPTY);
         password = SpecialUtil.MD5encode(password);
         User user = userRepository.findByUsername(username);
-        System.out.println("login: "+user.toString());
-        if(null==user)
+        System.out.println("login: " + user.toString());
+        if (null == user)
             throw new InternalException(ErrorEnum.USERNAME_PASSWORD_ERROR);
-        if (password != null && password.equals(user.getPassword())){
+        if (password != null && password.equals(user.getPassword())) {
             return user;
-        }
-        else{
+        } else {
             throw new InternalException(ErrorEnum.USERNAME_PASSWORD_ERROR);
         }
     }
@@ -42,7 +42,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public void saveUser(User user) {
+        if (user == null)
+            throw new InternalException(ErrorEnum.PARAM_IS_EMPTY);
         userRepository.save(user);
     }
 }

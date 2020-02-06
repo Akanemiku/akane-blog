@@ -16,7 +16,6 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CommentServiceImpl implements CommentService {
@@ -37,7 +36,7 @@ public class CommentServiceImpl implements CommentService {
         // TODO 内容判断
         // TODO 可设置作者，需要后端管理联动
         // 插入评论
-        comment.setStatus(CommentEnum.STATUS_BLANK.getType());
+        comment.setStatus(CommentEnum.UNCHECKED.getType());
         comment.setCreated(DateUtil.getCurrentUnixTime());
         commentRepository.save(comment);
         // 文章评论总数+1
