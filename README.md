@@ -1,1 +1,1 @@
-# akane-blog
+# Akane Blog
