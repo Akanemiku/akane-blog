@@ -1,6 +1,6 @@
 <p align=center>
   <a href="#">
-    <img src="./doc/favicon.png" alt="Akane Blog" style="width:200px;height:200px">
+    <img src="./doc/favicon.png" alt="Akane Blog" style="width:150px;height:150px">
   </a>
 </p>
 
