@@ -7,11 +7,11 @@
 # Akane Blog
 
 ![LICENSE](https://img.shields.io/badge/License-MIT-blue.svg)
-![LICENSE](https://img.shields.io/badge/JDK-1.8%2B-brightgreen)
-![LICENSE](https://img.shields.io/badge/SpringBoot-2.1.3.RELEASE-brightgreen)
-![LICENSE](https://img.shields.io/badge/Redis-2.1.3.RELEASE-red)
-![LICENSE](https://img.shields.io/badge/Druid-1.1.10-yellow) 
-![LICENSE](https://img.shields.io/badge/Swagger2-2.8.0-brightgreen)
+![JDK](https://img.shields.io/badge/JDK-1.8%2B-brightgreen)
+![SpringBoot](https://img.shields.io/badge/SpringBoot-2.1.3.RELEASE-brightgreen)
+![Redis](https://img.shields.io/badge/Redis-2.1.3.RELEASE-red)
+![Druid](https://img.shields.io/badge/Druid-1.1.10-yellow) 
+![Swagger2](https://img.shields.io/badge/Swagger2-2.8.0-brightgreen)
 
 
 ## 基于 SpringBoot + Thyemeleaf 的个人博客
