@@ -20,7 +20,7 @@
 
 [中文](README.md)  | [English](README_EN.md) 
 
-### 1.技术栈
+### 1. 技术栈
 
 #### 后端
 
@@ -39,7 +39,7 @@
 - MarkDown编辑: Editor.md
 - 弹窗: SweetAlert
 
-### 2.界面展示
+### 2. 界面展示
 
 #### 前台博客
 
@@ -53,7 +53,7 @@
 
 ![后台.gif](/doc/后台.gif)
 
-### 3.构建及运行
+### 3. 构建及运行
 
 - 以``maven``形式导入本项目
 - 新建数据库，导入sql``doc/akane_blog.sql``
@@ -66,7 +66,7 @@
 
 > MySQL 8以下版本需要在pom中指定对应``mysql-connector-java``对应版本及修改``driver-class``为``com.mysql.jdbc.Driver``
 
-### 4.后续计划
+### 4. 后续计划
 
 - [ ] 1. 使用JWT+SpringSecurity进行权限校验
 - [ ] 2. 接口防护，现仅在前端进行基础防护
