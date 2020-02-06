@@ -13,7 +13,12 @@
 ![LICENSE](https://img.shields.io/badge/Druid-1.1.10-yellow) 
 ![LICENSE](https://img.shields.io/badge/Swagger2-2.8.0-brightgreen)
 
+
 ## 基于 SpringBoot + Thyemeleaf 的个人博客
+
+### 说明
+
+[中文](README.md)  | [English](README_EN.md) 
 
 ### 1.技术栈
 
