@@ -12,6 +12,7 @@ import java.io.Serializable;
 @Entity
 @Table(name = "t_user")
 public class User implements Serializable {
+    private static final long serialVersionUID = -4363734549394202180L;
     /** 主键编号 */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

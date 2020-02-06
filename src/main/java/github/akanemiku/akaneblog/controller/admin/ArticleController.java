@@ -113,7 +113,6 @@ public class ArticleController {
             Content article = contentService.getArticleById(cid);
             article.setTitle(title);
             article.setCid(cid);
-            article.setTitlePic(titlePic);
             article.setSlug(slug);
             article.setContent(content);
             article.setModified(DateUtil.getCurrentUnixTime());
@@ -157,7 +156,6 @@ public class ArticleController {
         try{
             Content article = new Content();
             article.setTitle(title);
-            article.setTitlePic(titlePic);
             article.setSlug(slug);
             article.setContent(content);
             article.setCreated(DateUtil.getCurrentUnixTime());

@@ -44,7 +44,7 @@ public class HomeController {
      */
     @GetMapping("/")
     public String index(@RequestParam(value = "pageNo", defaultValue = "0", required = false) Integer pageNo,
-                        @RequestParam(value = "pageSize", defaultValue = "1", required = false) Integer pageSize,
+                        @RequestParam(value = "pageSize", defaultValue = "3", required = false) Integer pageSize,
                         HttpServletRequest request) {
 
         Pageable pageable = PageRequest.of(pageNo, pageSize);
@@ -62,7 +62,7 @@ public class HomeController {
      */
     @GetMapping("/archives")
     public String archives(@RequestParam(value = "pageNo", defaultValue = "0", required = false) Integer pageNo,
-                           @RequestParam(value = "pageSize", defaultValue = "1", required = false) Integer pageSize,
+                           @RequestParam(value = "pageSize", defaultValue = "3", required = false) Integer pageSize,
                            HttpServletRequest request) {
 
         Pageable pageable = PageRequest.of(pageNo, pageSize);

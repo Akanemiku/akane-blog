@@ -37,7 +37,7 @@ public class ContentServiceImpl implements ContentService {
 
 
     @Override
-    @Cacheable(value = "articles",key = "'allArticles'")
+    @CacheEvict(value = "articles", allEntries = true, beforeInvocation = true)
     public Page<Content> getAllArticles(Pageable pageable) {
         return contentRepository.findAll(pageable);
     }

@@ -16,6 +16,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Log implements Serializable {
+    private static final long serialVersionUID = -2338486444059664397L;
     /**
      * 日志主键
      */

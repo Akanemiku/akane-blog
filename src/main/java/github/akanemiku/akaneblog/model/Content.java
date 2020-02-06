@@ -12,6 +12,7 @@ import java.io.Serializable;
 @Entity
 @Table(name = "t_content")
 public class Content implements Serializable {
+    private static final long serialVersionUID = -2791508030874585618L;
     /**
      * 文章的主键编号
      */

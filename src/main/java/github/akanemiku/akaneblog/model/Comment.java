@@ -12,6 +12,7 @@ import java.io.Serializable;
 @Entity
 @Table(name = "t_comment")
 public class Comment implements Serializable {
+    private static final long serialVersionUID = 8250650017123486810L;
     /**
      * comment表主键
      */

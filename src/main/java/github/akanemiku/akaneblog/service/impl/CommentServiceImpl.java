@@ -55,7 +55,7 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    @Cacheable(value = "comment", key = "'allComments'")
+    @CacheEvict(value = "comment", allEntries = true, beforeInvocation = true)
     public Page<Comment> getAllComments(Pageable pageable) {
         return commentRepository.findAll(pageable);
     }

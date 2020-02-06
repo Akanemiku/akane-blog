@@ -20,6 +20,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @IdClass(Relation.class)//所有字段均为主键
 public class Relation implements Serializable {
+    private static final long serialVersionUID = -4372841921668787601L;
     /** 文章主键 */
     private Integer cid;
 

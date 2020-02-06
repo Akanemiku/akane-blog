@@ -12,6 +12,7 @@ import java.io.Serializable;
 @Entity
 @Table(name = "t_meta")
 public class Meta implements Serializable {
+    private static final long serialVersionUID = 8026603520539404375L;
     /**
      * 项目主键
      */

@@ -14,6 +14,7 @@ import java.io.Serializable;
 @Entity
 @Table(name = "t_option")
 public class Option implements Serializable {
+    private static final long serialVersionUID = -1715836396428018364L;
     /** 名称 */
     @Id
     private String name;
