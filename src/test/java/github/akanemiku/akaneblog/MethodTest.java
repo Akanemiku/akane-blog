@@ -10,6 +10,7 @@ import github.akanemiku.akaneblog.repository.dao.MetaDao;
 import github.akanemiku.akaneblog.utils.Commons;
 import github.akanemiku.akaneblog.utils.RedisUtil;
 import github.akanemiku.akaneblog.utils.SpecialUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,6 +24,7 @@ import java.util.List;
 import java.util.Map;
 
 @SpringBootTest
+@Slf4j
 @RunWith(SpringRunner.class)
 public class MethodTest {
     @Autowired
@@ -36,6 +38,15 @@ public class MethodTest {
         System.out.println(redis.get("bbb"));
         Integer login_status = (Integer) redis.get("login_status");
         System.out.println(login_status);
+    }
+
+    @Test
+    public void test2(){
+        log.info("----------info----------");
+        log.error("----------error----------");
+        log.debug("----------debug----------");
+        log.trace("----------trace----------");
+        log.warn("----------warn----------");
     }
 
 }

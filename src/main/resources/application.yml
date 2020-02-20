@@ -68,3 +68,6 @@ mybatis:
 
 swagger:
   show: true
+
+logging:
+  config: src/main/resources/logback-spring.xml
