@@ -6,12 +6,12 @@
 
 # Akane Blog
 
-![LICENSE](https://img.shields.io/badge/License-MIT-blue.svg)
-![JDK](https://img.shields.io/badge/JDK-1.8%2B-brightgreen)
-![SpringBoot](https://img.shields.io/badge/SpringBoot-2.1.3.RELEASE-brightgreen)
-![Redis](https://img.shields.io/badge/Redis-2.1.3.RELEASE-red)
-![Druid](https://img.shields.io/badge/Druid-1.1.10-yellow) 
-![Swagger2](https://img.shields.io/badge/Swagger2-2.8.0-brightgreen)
+![LICENSE](/doc/license.svg)
+![JDK](/doc/JDK.svg)
+![SpringBoot](/doc/SpringBoot.svg)
+![Redis](/doc/Redis.svg)
+![Druid](/doc/Druid.svg) 
+![Swagger2](/doc/Swagger2.svg)
 
 
 ## 基于 SpringBoot + Thyemeleaf 的个人博客
