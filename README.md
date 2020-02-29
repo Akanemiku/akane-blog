@@ -83,4 +83,4 @@ Email：yux.liu@foxmail.com
 
 [MIT License](https://magicdawn.mit-license.org/)
 
-Copyright (c) 2019-present, Akanemiku
+Copyright (c) 2019-present, Akanemiku.
