@@ -19,14 +19,12 @@ public class OptionServiceImpl implements OptionService {
     private OptionRepository optionRepository;
 
     @Override
-    @Cacheable(value = "options", key = "'allOptions'")
     public List<Option> getOptions() {
         return optionRepository.findAll();
     }
 
     @Override
     @Transactional
-    @CacheEvict(value = {"options", "option"}, allEntries = true, beforeInvocation = true)
     public void saveOptions(Map<String, String> options) {
         if (null != options && !options.isEmpty()) {
             Option option = new Option();
@@ -39,7 +37,6 @@ public class OptionServiceImpl implements OptionService {
     }
 
     @Override
-    @Cacheable(value = "option", key = "'optionByname+' + #p0")
     public Option getByName(String name) {
         return optionRepository.findById(name).get();
     }

@@ -1,14 +1,14 @@
 server:
-  port: 8081
+  port: 8761
 spring:
   application:
     name: akane-blog
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     platform: mysql
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost:3306/akane_blog?serverTimezone=GMT%2B8&useSSL=false&characterEncoding=UTF-8
-    username: root
+    username: akane
     password: 6458
     druid:
       initial-size: 2
@@ -29,24 +29,6 @@ spring:
         login-username: akane
         login-password: 6458
 
-  redis:
-    host: 47.100.93.218
-    port: 6379
-    password:
-    #超时时间(毫秒)
-    timeout: 3600
-    # Redis默认情况下有16个分片，这里配置具体使用的分片，默认是0
-    database: 0
-    lettuce:
-      pool:
-        # 最大活跃链接数(使用负值表示没有限制) 默认8
-        max-active: 8
-        # 最大阻塞等待时间(使用负值表示没有限制) 默认 -1
-        max-wait: -1
-        # 最大空闲连接数 默认8
-        max-idle: 8
-        # 最小空闲连接数 默认0
-        min-idle: 0
 
   thymeleaf:
     prefix: classpath:/templates/
@@ -68,6 +50,3 @@ mybatis:
 
 swagger:
   show: true
-
-logging:
-  config: src/main/resources/logback-spring.xml

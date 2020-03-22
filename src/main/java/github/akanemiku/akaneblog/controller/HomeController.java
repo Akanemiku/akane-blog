@@ -11,7 +11,6 @@ import github.akanemiku.akaneblog.service.ContentService;
 import github.akanemiku.akaneblog.service.MetaService;
 import github.akanemiku.akaneblog.utils.APIResponse;
 import github.akanemiku.akaneblog.utils.IPUtils;
-import github.akanemiku.akaneblog.utils.RedisUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -32,8 +31,6 @@ public class HomeController {
     private MetaService metaService;
     @Autowired
     private CommentService commentService;
-    @Autowired
-    private RedisUtil redis;
 
     /**
      * 博客主页
@@ -188,13 +185,7 @@ public class HomeController {
         if (StringUtils.isBlank(ref)) {
             return APIResponse.failure("访问失败");
         }
-        //禁止连续评论，每30s才可评论一次
-        Object comment_status = redis.get(comment.getAuthor());
-        if(comment_status!=null){
-            return APIResponse.failure("您发表的评论太快了，请稍后再试！");
-        }else{
-            redis.set(comment.getAuthor(),IPUtils.getIpAddress(request),WebConst.COMMENT_INTERVAL);
-        }
+
         // TODO 可能存在的输入异常，如用户输入特殊字符、html等，需要对数据进行处理
         comment.setIp(IPUtils.getIpAddress(request));
         comment.setClient(request.getHeader("User-Agent"));

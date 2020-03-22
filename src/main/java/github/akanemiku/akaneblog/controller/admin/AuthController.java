@@ -10,7 +10,6 @@ import github.akanemiku.akaneblog.service.UserService;
 import github.akanemiku.akaneblog.utils.APIResponse;
 import github.akanemiku.akaneblog.utils.Commons;
 import github.akanemiku.akaneblog.utils.CookieUtil;
-import github.akanemiku.akaneblog.utils.RedisUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,8 +28,7 @@ public class AuthController {
     private UserService userService;
     @Autowired
     private LogService logService;
-    @Autowired
-    private RedisUtil redis;
+
     private static Integer error_count = 0;
 
     @GetMapping(value = "/login")
@@ -45,12 +43,8 @@ public class AuthController {
                                @RequestParam(name = "remember_me", required = false) String remember_me,
                                HttpServletRequest request,
                                HttpServletResponse response) {
-        Integer login_status = (Integer) redis.get("login_status");
-        System.out.println(login_status);
         try {
-            if(login_status!=null&&login_status==2){
-                return APIResponse.failure("您输入错误次数过多，请5分钟后再试！");
-            }
+
             // 调用Service登录方法
             User user = userService.login(username, password);
             // 设置登录用户session
@@ -64,14 +58,11 @@ public class AuthController {
 
         } catch (InternalException e) {
             if(error_count>2){
-                redis.set("login_status",2,60*5);
                 error_count = 0;
             }
             error_count++;
             System.out.println(error_count);
-            if(login_status!=null&&login_status==2){
-                return APIResponse.failure("您输入错误次数过多，请5分钟后再试！");
-            }
+
             String msg = e.getMessage();
             return APIResponse.failure(msg);
         }

@@ -37,13 +37,11 @@ public class ContentServiceImpl implements ContentService {
 
 
     @Override
-    @CacheEvict(value = "articles", allEntries = true, beforeInvocation = true)
     public Page<Content> getAllArticles(Pageable pageable) {
         return contentRepository.findAll(pageable);
     }
 
     @Override
-    @Cacheable(value = "article",key = "'articleByCategory_'+#p0")
     public List<Content> getArticleByCategory(String category) {
         if(category==null)
             throw new InternalException(ErrorEnum.PARAM_IS_EMPTY);
@@ -51,7 +49,6 @@ public class ContentServiceImpl implements ContentService {
     }
 
     @Override
-    @Cacheable(value = "article",key = "'articleByTag_'+#p0")
     public List<Content> getArticleByTag(Meta tag) {
         if(tag==null)
             throw new InternalException(ErrorEnum.PARAM_IS_EMPTY);
@@ -63,7 +60,6 @@ public class ContentServiceImpl implements ContentService {
     }
 
     @Override
-    @Cacheable(value = "article",key = "'articleById_'+#p0")
     public Content getArticleById(Integer cid) {
         if(cid==null)
             throw new InternalException(ErrorEnum.PARAM_IS_EMPTY);
@@ -73,14 +69,12 @@ public class ContentServiceImpl implements ContentService {
 
     @Override
     @Transactional
-    @CacheEvict(value = {"article","articles"}, allEntries = true, beforeInvocation = true)
     public void updateContent(Content content) {
         contentRepository.save(content);
     }
 
     @Override
     @Transactional
-    @CacheEvict(value = {"article","articles"}, allEntries = true, beforeInvocation = true)
     public void saveContent(Content content) {
         if(content==null)
             throw new InternalException(ErrorEnum.PARAM_IS_EMPTY);
@@ -121,7 +115,6 @@ public class ContentServiceImpl implements ContentService {
 
     @Override
     @Transactional
-    @CacheEvict(value = {"article","articles"}, allEntries = true, beforeInvocation = true)
     public void deleteArticleById(Integer cid) {
         contentRepository.deleteById(cid);
     }

@@ -27,7 +27,6 @@ public class CommentServiceImpl implements CommentService {
     private ContentRepository contentRepository;
 
     @Override
-    @Cacheable(value = "comment", key = "'commentsByCId_'+#p0")
     public List<Comment> getCommentsByCid(Integer cid) {
         if(cid==null)
             throw new InternalException(ErrorEnum.PARAM_IS_EMPTY);
@@ -35,7 +34,6 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    @CacheEvict(value = "comment", allEntries = true)
     public void insertComment(Comment comment) {
         if(comment==null)
             throw new InternalException(ErrorEnum.PARAM_IS_EMPTY);
@@ -55,20 +53,17 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    @CacheEvict(value = "comment", allEntries = true, beforeInvocation = true)
     public Page<Comment> getAllComments(Pageable pageable) {
         return commentRepository.findAll(pageable);
     }
 
     @Override
-    @Cacheable(value = "comment", key = "'commentsById_'+#p0")
     public Comment getCommentById(Integer id) {
         return commentRepository.findById(id).get();
     }
 
     @Override
     @Transactional
-    @CacheEvict(value = "comment", allEntries = true)
     public void updateComment(Integer coid, String status) {
         if (null == coid)
             throw new InternalException(ErrorEnum.PARAM_IS_EMPTY);

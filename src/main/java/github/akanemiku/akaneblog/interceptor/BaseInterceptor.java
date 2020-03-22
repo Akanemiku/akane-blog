@@ -34,6 +34,8 @@ public class BaseInterceptor implements HandlerInterceptor {
     @Autowired
     private HttpSession session;
 
+    private HashMap<String,Integer> redis;
+
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         // 请求URL不包含域名
