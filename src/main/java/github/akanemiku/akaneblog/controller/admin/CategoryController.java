@@ -47,7 +47,6 @@ public class CategoryController {
             String msg = "分类保存失败";
             return APIResponse.failure(msg);
         }
-
         return APIResponse.success();
     }
 
