@@ -29,6 +29,8 @@ spring:
         login-username: akane
         login-password: 6458
 
+  #部署在Linux上时需要修改host为localhost，原因未知
+  #部署后在超时时间过后将会导致无法访问，需要多次访问让redis重启才行，疑似lettuce的bug
   redis:
     host: 47.100.93.218
     port: 6379
