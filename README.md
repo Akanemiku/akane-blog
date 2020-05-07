@@ -65,7 +65,7 @@
 - 新建数据库，导入sql``doc/akane_blog.sql``
 - 修改``/src/main/resources/application.yml``文件
   - 修改数据库连接url、username及password
-  - 若使用缓存，则修改`redis`的host及password，不使用推荐本项目dev分支，该分支去除redis及日志相关配置见： 
+  - 若使用缓存，则修改`redis`的host及password，若不使用缓存，则推荐使用本项目的dev分支，该分支去除redis及日志相关配置见： 
   [dev分支](https://github.com/Akanemiku/akane-blog/tree/dev)
    
 - 运行项目，执行``AkaneBlogApplication.java``
