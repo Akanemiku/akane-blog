@@ -54,7 +54,7 @@
 - Create new Datebase，importing sql``doc/akane_blog.sql``
 - Modify ``/src/main/resources/application.yml`` file
   - Modify database connection url、username and password
-  - If cache is used, modify ``redis`` host and password
+  - If cache is used, modify ``redis`` host and password, others see dev branch
 - Running projects, executing ``AkaneBlogApplication.java``
   - Modify port in ``yml``，default: 8081
 - Input ``http://localhost:8081/`` in browser，``http://localhost:8081/admin/login`` enter the admin page
