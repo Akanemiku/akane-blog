@@ -9,7 +9,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/akane_blog?serverTimezone=GMT%2B8&useSSL=false&characterEncoding=UTF-8
     username: root
-    password: 6458
+    password: 
     druid:
       initial-size: 2
       min-idle: 2
