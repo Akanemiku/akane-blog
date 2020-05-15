@@ -44,7 +44,7 @@ public class ArticleController {
      */
     @GetMapping("")
     public String index(@RequestParam(value = "pageNo", defaultValue = "0", required = false) Integer pageNo,
-                        @RequestParam(value = "pageSize", defaultValue = "1", required = false) Integer pageSize,
+                        @RequestParam(value = "pageSize", defaultValue = "5", required = false) Integer pageSize,
                         HttpServletRequest request) {
         Pageable pageable = PageRequest.of(pageNo, pageSize);
         Page<Content> articles = contentService.getAllArticles(pageable);

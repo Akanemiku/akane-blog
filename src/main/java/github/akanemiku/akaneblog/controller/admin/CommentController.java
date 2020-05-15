@@ -22,7 +22,7 @@ public class CommentController {
 
     @GetMapping(value = "")
     public String index(@RequestParam(value = "pageNo", defaultValue = "0", required = false) Integer pageNo,
-                        @RequestParam(value = "pageSize", defaultValue = "1", required = false) Integer pageSize,
+                        @RequestParam(value = "pageSize", defaultValue = "5", required = false) Integer pageSize,
                         HttpServletRequest request) {
         Pageable pageable = PageRequest.of(pageNo, pageSize);
         Page<Comment> comments = commentService.getAllComments(pageable);
